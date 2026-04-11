@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --font-inter: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-cormorant: 'Cormorant Garamond', 'Garamond', 'Georgia', serif;
+  --font-jetbrains-mono: 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  --gold: #d4af37;
+  --gold-light: #f5e6a3;
+  --gold-deep: #9a7d0a;
+  --cream: #ede8de;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  @apply bg-navy-975 text-slate-100 antialiased;
+  min-height: 100vh;
+  font-family: var(--font-inter);
+}
+
+* { @apply border-slate-800; }
+
+::selection {
+  background: rgba(212, 175, 55, 0.22);
+  color: #fef9c3;
+}
+
+section {
+  @apply w-full px-6 py-20;
+}
+@media (min-width: 768px) {
+  section { @apply px-8; }
+}
+
+/* ─────────────────────────────────────────
+   SCROLLBAR — gold
+───────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #07050f; }
+::-webkit-scrollbar-thumb {
+  background: #9a7d0a;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover { background: #d4af37; }
+
+/* ─────────────────────────────────────────
+   FILM GRAIN
+───────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.028;
+  pointer-events: none;
+  z-index: 9999;
+  animation: grain 8s steps(10) infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10%       { transform: translate(-5%, -10%); }
+  20%       { transform: translate(-15%, 5%); }
+  30%       { transform: translate(7%, -25%); }
+  40%       { transform: translate(-5%, 25%); }
+  50%       { transform: translate(-15%, 10%); }
+  60%       { transform: translate(15%, 0%); }
+  70%       { transform: translate(0%, 15%); }
+  80%       { transform: translate(3%, 35%); }
+  90%       { transform: translate(-10%, 10%); }
+}
+
+/* ─────────────────────────────────────────
+   GRID DRIFT
+───────────────────────────────────────── */
+@keyframes grid-drift {
+  0%   { background-position: 0px 0px; }
+  100% { background-position: 72px 72px; }
+}
+.animate-grid-drift { animation: grid-drift 20s linear infinite; }
+
+/* ─────────────────────────────────────────
+   ROYAL GOLD BORDER GLOW — solid pulse
+───────────────────────────────────────── */
+@keyframes glow-border {
+  0%, 100% {
+    box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.10),
+                inset 0 0 0 1px rgba(212, 175, 55, 0.04);
+  }
+  50% {
+    box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.35),
+                inset 0 0 0 1px rgba(212, 175, 55, 0.08),
+                0 0 28px rgba(212, 175, 55, 0.12);
+  }
+}
+.animate-glow-border { animation: glow-border 4s ease-in-out infinite; }
+
+/* ─────────────────────────────────────────
+   ROYAL GOLD TEXT SHEEN
+   Metallic gold foil — gold to light gold only, no rainbow
+───────────────────────────────────────── */
+@keyframes gold-sheen {
+  0%   { background-position: -300% center; }
+  100% { background-position: 300% center; }
+}
+
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    #9a7d0a 0%,
+    #d4af37 25%,
+    #f5e6a3 50%,
+    #d4af37 75%,
+    #9a7d0a 100%
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gold-sheen 8s linear infinite;
+}
+
+/* ─────────────────────────────────────────
+   FLOAT ANIMATIONS
+───────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+@keyframes float-delayed {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-16px); }
+}
+@keyframes shimmer {
+  0%   { opacity: 0.4; filter: brightness(1); }
+  50%  { opacity: 0.7; filter: brightness(1.1); }
+  100% { opacity: 0.4; filter: brightness(1); }
+}
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 16px rgba(212, 175, 55, 0.15),
+                0 0 32px rgba(212, 175, 55, 0.06);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(212, 175, 55, 0.28),
+                0 0 56px rgba(212, 175, 55, 0.12);
+  }
+}
+.animate-float           { animation: float 6s ease-in-out infinite; }
+.animate-float-delayed   { animation: float-delayed 7s ease-in-out infinite; animation-delay: 1s; }
+.animate-float-delayed-2 { animation: float-delayed 8s ease-in-out infinite; animation-delay: 2s; }
+.animate-shimmer         { animation: shimmer 4s ease-in-out infinite; }
+.animate-glow-pulse      { animation: glow-pulse 3s ease-in-out infinite; }
+
+/* ─────────────────────────────────────────
+   ROYAL TEXTURE — gold crosshatch engraving
+   Two crossing diagonals — classic luxury
+───────────────────────────────────────── */
+.royal-texture {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Cpath d='M0 28 L28 0' stroke='rgba(212%2C175%2C55%2C0.08)' stroke-width='0.6'/%3E%3Cpath d='M0 0 L28 28' stroke='rgba(212%2C175%2C55%2C0.05)' stroke-width='0.5'/%3E%3C/svg%3E");
+  background-size: 28px 28px;
+  background-repeat: repeat;
+}
+
+/* ─────────────────────────────────────────
+   ROYAL CARD SURFACE
+   Gold top-edge highlight + noise grain
+   Like polished dark obsidian / stone
+───────────────────────────────────────── */
+.royal-card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gold 1px top-edge — light catching the polished top surface */
+.royal-card::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 1px;
+  background: rgba(212, 175, 55, 0.35);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Noise grain overlay — velvet texture */
+.royal-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: screen;
+}
+
+/* ─────────────────────────────────────────
+   TYPOGRAPHY
+───────────────────────────────────────── */
+.font-display {
+  font-family: var(--font-cormorant);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 0.88;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+.font-sans { font-family: var(--font-inter); }
+.font-mono { font-family: var(--font-jetbrains-mono); }
+
+.text-hero       { @apply font-display text-6xl font-bold leading-[0.85] tracking-[-0.025em] sm:text-7xl lg:text-8xl xl:text-[9.5rem]; }
+.text-display    { @apply font-display text-4xl font-semibold leading-[0.9] tracking-[-0.015em] sm:text-5xl lg:text-6xl; }
+.text-heading    { @apply font-display text-2xl font-semibold leading-tight tracking-[-0.01em] sm:text-3xl lg:text-4xl; }
+.text-subheading { @apply font-sans text-lg font-light leading-relaxed tracking-[0.005em] sm:text-xl lg:text-2xl; }
+.text-body       { @apply font-sans text-base leading-relaxed sm:text-lg; }
+.text-caption    { @apply font-mono text-sm font-semibold uppercase tracking-[0.06em]; }
