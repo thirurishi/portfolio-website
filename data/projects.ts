@@ -171,6 +171,55 @@ export const projectsData: ProjectData[] = [
   },
 
   {
+    slug: 'ai-resume-job-match-analyzer',
+    title: 'AI Resume & Job Match Analyzer',
+    description:
+      'Production-grade AI resume intelligence platform that analyzes resume-job compatibility using ATS scoring, NLP-based skill extraction, semantic similarity, and recruiter-focused feedback generation.',
+    overview:
+      'Built a complete end-to-end application featuring PDF resume parsing, skill gap analysis, recruiter insights, AI-generated cover letters, LinkedIn outreach generation, downloadable reports, and persistent analysis history tracking through SQLite.',
+    problem:
+      'Candidates often struggle to understand why their resume does not match a job description or pass ATS screening. Manual resume comparison is slow, inconsistent, and does not clearly show missing skills or improvement areas.',
+    objective:
+      'Build an AI-powered platform that compares resumes with job descriptions, calculates ATS match scores, identifies missing skills, and generates application-ready materials such as cover letters and LinkedIn outreach messages.',
+    input:
+      'PDF resumes and job descriptions provided by users for ATS scoring, NLP analysis, skill extraction, semantic matching, and recruiter-style feedback generation.',
+    stack: ['Python', 'Streamlit', 'FastAPI', 'NLP'],
+    techStack: ['Python', 'Streamlit', 'FastAPI', 'Scikit-learn', 'NLP', 'SQLite', 'PyMuPDF', 'Plotly', 'TF-IDF', 'Cosine Similarity'],
+    workflow: [
+      'PDF parsing: extracted resume text using PyMuPDF',
+      'Text preprocessing: cleaned resume and job description content for NLP analysis',
+      'Skill extraction: identified matched and missing skills from both documents',
+      'ATS scoring: calculated resume-job compatibility using TF-IDF and cosine similarity',
+      'Feedback generation: produced recruiter-focused improvement suggestions',
+      'Content generation: created AI-assisted cover letters and LinkedIn outreach messages',
+      'History tracking: stored previous analyses and results using SQLite'
+    ],
+    results:
+      'Created a deployable SaaS-style resume analyzer that calculates ATS match scores, highlights missing skills, generates improvement feedback, and produces application-ready materials in seconds.',
+    highlights: [
+      'ATS match scoring with semantic similarity analysis',
+      'PDF resume parsing and job description comparison',
+      'Skill gap analysis with matched and missing skills',
+      'AI-generated cover letters and LinkedIn outreach messages',
+      'Downloadable reports and SQLite-based analysis history'
+    ],
+    impact:
+      'Automates resume screening workflows and helps candidates improve ATS alignment, identify missing skills, and generate recruiter-ready job application materials faster.',
+    screenshots: [],
+    challenges:
+      'Designing a scoring logic that is simple, explainable, and useful for users while combining keyword matching, semantic similarity, and recruiter-style feedback.',
+    learnings: [
+      'ATS tools need both scoring and clear explanations to be useful',
+      'NLP preprocessing strongly affects matching accuracy',
+      'A good user experience matters as much as the algorithm',
+      'Persistent history makes the platform feel more production-ready'
+    ],
+    links: [
+      { label: 'GitHub', href: '#', variant: 'ghost' }
+    ]
+  },
+
+  {
     slug: 'darknet-analysis',
     title: 'Darknet Drug Trafficker Network Analysis',
     description:
