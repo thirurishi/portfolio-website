@@ -1,10 +1,10 @@
 export const aboutContent = {
   overview: [
-    'I am Thirumurugan Kumar a data scientist and machine learning engineer who transforms complex, messy data into systems that drive real decisions and measurable outcomes.',
-    'My work spans the full depth of modern data: precision-engineered Python pipelines, scalable SQL architecture, production-grade ML models, NLP platforms, and deployed APIs. I do not stop at the notebook I build things that run in the real world.',
-    'What makes me different is the rare combination of analytical rigour and creative vision. I am also a photographer trained to see light, composition, and narrative in a single frame. That instinct shapes everything from how I design a dashboard to how I tell a data story to an executive audience.',
-    'I am confident, curious, and relentlessly structured. I learn fast, adapt faster, and bring both technical depth and clear communication to every team I join.',
-    'Currently pursuing my Master\'s in Data Science and Analytics at EPITA, Paris actively seeking internships where data, intelligence, and impact intersect.'
+    'I turn complex, messy data into analysis and systems that support real decisions.',
+    'My work covers the full data lifecycle: Python and SQL pipelines, Power BI dashboards, machine learning models, NLP applications and APIs. I like taking a project past the notebook, to something people can actually use.',
+    'I am also a photographer. Training my eye on light, composition and story shapes how I design a dashboard and how I present findings to a non-technical audience.',
+    'I am structured, curious and quick to learn, and I communicate clearly with both technical and business teams.',
+    'I am currently completing my Master\'s in Data Science and Analytics at EPITA in Paris, and I am available now for a 6-month internship.'
   ],
 
   strengths: [
@@ -26,22 +26,22 @@ export const aboutContent = {
 
   highlightCards: [
     {
-      title: 'DATA TO DECISION INTELLIGENCE',
+      title: 'Data to decisions',
       description:
         'Transform raw structured data into polished dashboards, insights, and executive-ready recommendations.'
     },
     {
-      title: 'PREDICTIVE SYSTEMS',
+      title: 'Predictive models',
       description:
         'Deliver predictive models and forecasting pipelines that anticipate outcomes and guide strategy.'
     },
     {
-      title: 'AI-POWERED APPLICATIONS',
+      title: 'AI applications',
       description:
         'Build intelligent applications using NLP, deep learning, and scalable AI infrastructure.'
     },
     {
-      title: 'OPERATIONAL ANALYTICS',
+      title: 'Operational analytics',
       description:
         'Deploy data-driven workflows that provide reliable metrics, optimization signals, and business impact.'
     }

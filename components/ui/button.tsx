@@ -5,20 +5,18 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-full text-sm font-bold transition-all duration-300 transform-gpu focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-midnight-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-975 disabled:pointer-events-none disabled:opacity-50 tracking-wide',
+  'group/btn relative inline-flex items-center justify-center overflow-hidden whitespace-nowrap font-mono text-[12px] uppercase tracking-[0.2em] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-safelight-500 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-975 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
-        default:
-          'bg-midnight-500 text-navy-975 font-bold border border-midnight-400 shadow-[0_0_28px_rgba(212,175,55,0.22)] hover:bg-midnight-400 hover:shadow-[0_0_44px_rgba(212,175,55,0.42)] hover:-translate-y-1 active:scale-[0.96]',
-        secondary:
-          'border border-midnight-400/60 bg-navy-950 text-midnight-400 shadow-[0_0_0_1px_rgba(212,175,55,0.08)] hover:border-midnight-400 hover:bg-navy-900 hover:text-midnight-300 hover:-translate-y-1 active:scale-[0.96]',
-        ghost: 'text-midnight-400 ring-1 ring-midnight-400/50 bg-transparent hover:bg-navy-900 hover:text-midnight-300 hover:ring-midnight-400 hover:-translate-y-1 active:scale-[0.96]'
+        default: 'bg-paper-100 text-ink-975 hover:bg-safelight-500 hover:text-paper-50',
+        secondary: 'border border-paper-100/35 bg-ink-975/30 text-paper-100 backdrop-blur-sm hover:border-paper-100 hover:bg-paper-100/10',
+        ghost: 'text-paper-200 underline decoration-paper-100/30 underline-offset-[6px] hover:text-paper-50 hover:decoration-safelight-500'
       },
       size: {
-        default: 'h-12 px-8 gap-2',
-        sm: 'h-10 px-6 gap-1.5',
-        lg: 'h-14 px-12 gap-2'
+        default: 'h-11 px-6 gap-2',
+        sm: 'h-10 px-5 gap-1.5',
+        lg: 'h-12 px-8 gap-2'
       }
     },
     defaultVariants: {
@@ -33,11 +31,7 @@ export type ButtonProps =
   | (VariantProps<typeof buttonVariants> & React.AnchorHTMLAttributes<HTMLAnchorElement> & { href: string });
 
 export function Button({ className, variant, size, href, ...props }: ButtonProps) {
-  const classes = cn(
-    buttonVariants({ variant, size }),
-    'transition-all duration-500 ease-out hover:-translate-y-1.5 active:scale-[0.95] will-change-transform backdrop-blur-sm',
-    className
-  );
+  const classes = cn(buttonVariants({ variant, size }), className);
 
   if (href) {
     return (
@@ -50,7 +44,5 @@ export function Button({ className, variant, size, href, ...props }: ButtonProps
     );
   }
 
-  return (
-    <button className={classes} {...(props as any)} />
-  );
+  return <button className={classes} {...(props as any)} />;
 }

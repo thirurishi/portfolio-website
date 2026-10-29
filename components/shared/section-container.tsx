@@ -1,38 +1,34 @@
+import { FocusPull } from '@/components/fx/focus-pull';
+
 interface SectionContainerProps {
   id?: string;
   title?: string;
   intro?: string;
+  /** Scene number shown above the title, like a film slate. */
+  scene?: string;
+  /** Small label after the scene number. */
+  kicker?: string;
+  className?: string;
   children: React.ReactNode;
 }
 
-export function SectionContainer({ id, title, intro, children }: SectionContainerProps) {
+export function SectionContainer({ id, title, intro, scene, kicker, className, children }: SectionContainerProps) {
   return (
-    <section id={id} className="relative royal-texture">
-      {/* Gold separator rule at top of every section */}
-      <div className="absolute inset-x-0 top-0 h-px bg-midnight-400/35" />
-
-      {title ? (
-        <div className="mb-12">
-          {/* Label row with gold ornament */}
-          <div className="mb-4 flex items-center gap-3">
-            <span className="h-px w-10 bg-midnight-400/70" />
-            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.45em] text-midnight-400">
-              ✦ Portfolio
-            </span>
-            <span className="h-px flex-1 bg-midnight-400/20" />
-          </div>
-          {/* Main heading */}
-          <h2 className="text-shimmer text-4xl font-black tracking-tight md:text-5xl">{title}</h2>
-          {/* Gold underline */}
-          <div className="mt-5 flex items-center gap-3">
-            <div className="h-px w-14 bg-midnight-400/60" />
-            <div className="h-px w-4 bg-midnight-400/30" />
-          </div>
-        </div>
-      ) : null}
-
-      {intro ? <p className="mb-10 max-w-3xl text-slate-400 leading-7">{intro}</p> : null}
-      {children}
+    <section id={id} className={`relative ${className ?? ''}`}>
+      <div className="mx-auto w-full max-w-7xl">
+        {title ? (
+          <FocusPull className="mb-14">
+            <div className="mb-6 flex items-center gap-4">
+              {scene ? <span className="camera-label !text-safelight-400">Scene {scene}</span> : null}
+              <span className="h-px flex-1 bg-ink-700" />
+              {kicker ? <span className="camera-label hidden sm:inline">{kicker}</span> : null}
+            </div>
+            <h2 className="text-display text-paper-50">{title}</h2>
+            {intro ? <p className="mt-6 max-w-2xl text-lg leading-relaxed text-paper-500">{intro}</p> : null}
+          </FocusPull>
+        ) : null}
+        {children}
+      </div>
     </section>
   );
 }

@@ -26,14 +26,14 @@ export const personalInfo = {
     'AI Adoption & Business Impact'
   ],
   resumeFocus: [
-    'Analytics-driven product systems',
-    'Machine learning and NLP delivery',
-    'Dashboard design for executive decisions'
+    'SQL and Python analysis, from raw data to KPIs',
+    'Power BI reporting with clean data models and DAX',
+    'Machine learning, NLP and deployed data apps'
   ],
   internshipInterests: [
-    'Data engineering workflows',
-    'AI-enabled business solutions',
-    'Mobile and analytics integration'
+    '6-month end-of-studies internship, available now',
+    'Data Analyst, Data Scientist, BI or AI roles',
+    'Teams that turn data into business decisions'
   ],
   resumeHighlights: [
     'Data strategy and machine learning delivery',

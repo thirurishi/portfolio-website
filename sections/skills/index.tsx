@@ -1,100 +1,41 @@
 'use client';
 
-import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
-import { Badge, Card } from '@/components/ui';
 import { SectionContainer } from '@/components/shared';
+import { FocusPull } from '@/components/fx/focus-pull';
 import { skillsData } from '@/data/skills';
-import { fadeInUp, sectionContainer } from '@/lib/motion';
 
-/* ── 3D tilt card ──────────────────────────────────────────────── */
-function SkillCard({ group }: { group: typeof skillsData[number] }) {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [6, -6]), { stiffness: 400, damping: 28 });
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-6, 6]), { stiffness: 400, damping: 28 });
-
-
-  function onMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    const rect = e.currentTarget.getBoundingClientRect();
-    mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
-    mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
-  }
-
-  function onMouseLeave() {
-    mouseX.set(0);
-    mouseY.set(0);
-  }
-
-  return (
-    <motion.div
-      variants={fadeInUp}
-      onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
-      style={{
-        rotateX,
-        rotateY,
-        transformPerspective: 800,
-        transformStyle: 'preserve-3d',
-      }}
-      className="group relative h-full"
-    >
-      {/* Outer glow */}
-      <div className="pointer-events-none absolute -inset-px rounded-[28px] opacity-0 transition duration-500 group-hover:opacity-100 shadow-[0_0_40px_rgba(212,175,55,0.18),inset_0_0_0_1px_rgba(212,175,55,0.15)]" />
-
-      <Card className="relative h-full overflow-hidden border-midnight-400/28 bg-navy-900 shadow-midnight transition-colors duration-300 hover:border-midnight-400/40">
-
-
-        <div className="relative" style={{ transform: 'translateZ(16px)' }}>
-          {/* Header */}
-          <div className="rounded-[inherit] border-b border-navy-800/60 bg-navy-950/60 px-6 py-5">
-            <div className="mb-3 flex items-center justify-between">
-              <h3 className="text-base font-semibold text-white">{group.category}</h3>
-              <Badge className="bg-navy-950/90 text-midnight-400">{group.items.length}</Badge>
-            </div>
-            <p className="text-sm leading-6 text-slate-400">{group.description}</p>
-          </div>
-
-          {/* Skill pills */}
-          <div className="flex flex-wrap gap-2.5 px-6 py-5">
-            {group.items.map((skill) => (
-              <span
-                key={skill}
-                className="rounded-full border border-midnight-400/15 bg-navy-975/90 px-3 py-1.5 text-sm font-medium text-slate-300 transition duration-200 group-hover:border-midnight-400/40 group-hover:text-white"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
-        </div>
-      </Card>
-    </motion.div>
-  );
-}
-
-/* ── Section ────────────────────────────────────────────────────── */
 export function Skills() {
   return (
-    <SectionContainer id="skills" title="Skills">
-
-      <div className="mb-8 max-w-3xl text-slate-300">
-        <p className="text-body leading-8 sm:text-lg">
-          I design and deliver high-impact data systems by combining analytics, machine learning, and scalable engineering practices.
-        </p>
-      </div>
-
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
-        variants={sectionContainer}
-        className="grid gap-6 md:grid-cols-2 xl:grid-cols-3"
-      >
-        {skillsData.map((group) => (
-          <SkillCard key={group.category} group={group} />
+    <SectionContainer
+      id="skills"
+      scene="03"
+      kicker="Kit"
+      title="The kit."
+      intro="The tools I reach for, grouped the way I use them: from the first SQL query to a deployed, monitored system."
+    >
+      <div className="grid gap-px bg-ink-700 sm:grid-cols-2 lg:grid-cols-4">
+        {skillsData.map((group, i) => (
+          <FocusPull key={group.category} delay={(i % 4) * 0.08} className="group relative bg-ink-975 p-6 transition-colors duration-500 hover:bg-ink-900">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[11px] text-safelight-400">{String(i + 1).padStart(2, '0')}</span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper-700">{group.items.length} tools</span>
+            </div>
+            <h3 className="mt-4 font-display text-2xl text-paper-50">{group.category}</h3>
+            <p className="mt-2 text-[14px] leading-relaxed text-paper-600">{group.description}</p>
+            <ul className="mt-5 flex flex-wrap gap-1.5">
+              {group.items.map((skill) => (
+                <li
+                  key={skill}
+                  className="border border-ink-600 px-2.5 py-1 font-mono text-[11px] text-paper-300 transition-colors duration-300 group-hover:border-paper-100/25"
+                >
+                  {skill}
+                </li>
+              ))}
+            </ul>
+            <span className="pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-safelight-500 transition-transform duration-700 group-hover:scale-x-100" />
+          </FocusPull>
         ))}
-      </motion.div>
-
+      </div>
     </SectionContainer>
   );
 }

@@ -1,4 +1,5 @@
 import { Navbar } from '@/components/layout';
+import { DevelopingIntro } from '@/components/fx/developing-intro';
 import { Hero } from '@/sections/hero';
 import { About } from '@/sections/about';
 import { Skills } from '@/sections/skills';
@@ -7,24 +8,22 @@ import { Journey } from '@/sections/journey';
 import { Resume } from '@/sections/resume';
 import { Contact } from '@/sections/contact';
 import { Footer } from '@/sections/footer';
-import { LoadingScreen } from '@/components/ui';
 
 export default function HomePage() {
   return (
     <>
-      <LoadingScreen />
-      <main id="home" className="relative overflow-hidden">
-      {/* Global ambient effects */}
+      <DevelopingIntro />
       <Navbar />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Journey />
-      <Resume />
-      <Contact />
+      <main className="relative overflow-x-clip">
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Journey />
+        <Resume />
+        <Contact />
+      </main>
       <Footer />
-    </main>
     </>
   );
 }

@@ -1,96 +1,56 @@
 'use client';
 
-import { motion } from 'motion/react';
+import { motion, useReducedMotion, useScroll } from 'motion/react';
+import { useRef } from 'react';
 import { SectionContainer } from '@/components/shared';
+import { FocusPull } from '@/components/fx/focus-pull';
 import { timelineData } from '@/data/timeline';
-import { fadeInUp, sectionContainer } from '@/lib/motion';
 
-const containerVariants = sectionContainer;
-const itemVariants = fadeInUp;
-
-const accentMap = {
-  education: 'bg-midnight-400',
-  internship: 'bg-rose-500',
-  career: 'bg-fuchsia-500'
-} as const;
-
-type CategoryKey = keyof typeof accentMap;
+const categoryLabel = { education: 'Education', internship: 'Internship', career: 'Experience' } as const;
 
 export function Journey() {
+  const listRef = useRef<HTMLOListElement>(null);
+  const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: listRef, offset: ['start 75%', 'end 55%'] });
+
   return (
-    <SectionContainer
-      id="journey"
-      title="Career Journey"
-      intro="A focused progression from software and IT foundations to data science, analytics, machine learning, and production-ready systems."
-    >
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={containerVariants}
-        className="royal-card relative overflow-hidden rounded-[36px] border border-midnight-400/28 bg-navy-900 p-5 shadow-[0_0_0_1px_rgba(212,175,55,0.08),_0_32px_80px_rgba(7,5,15,0.9)] sm:p-8"
-      >
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-midnight-400/20" />
-        <div className="pointer-events-none absolute left-10 top-16 hidden h-[calc(100%-4rem)] w-px rounded-full bg-navy-700/70 md:block" />
+    <SectionContainer id="journey" scene="05" kicker="Journey" title="How I got here.">
+      <ol ref={listRef} className="relative">
+        {/* Timeline rule that draws as you scroll */}
+        <span className="absolute left-[7px] top-2 hidden h-[calc(100%-1rem)] w-px bg-ink-700 md:left-[calc(25%_+_43px)] md:block" />
+        <motion.span
+          className="absolute left-[7px] top-2 hidden h-[calc(100%-1rem)] w-px origin-top bg-safelight-500 md:left-[calc(25%_+_43px)] md:block"
+          style={{ scaleY: reduce ? 1 : scrollYProgress }}
+        />
 
-        <div className="space-y-6">
-          {timelineData.map((item) => (
-            <motion.article
-              key={`${item.year}-${item.title}`}
-              variants={itemVariants}
-              className="relative overflow-hidden rounded-[28px] border border-midnight-400/25 bg-navy-900 p-6 shadow-midnight transition duration-300 hover:-translate-y-1 hover:border-midnight-400/50 animate-glow-border"
-            >
-              <div className="absolute -left-2 top-10 h-6 w-6 rounded-full border border-navy-700/80 bg-navy-950 shadow-[0_0_0_6px_rgba(15,23,42,0.25)] md:left-10">
-                <div
-                  className={`mx-auto mt-1 h-2.5 w-2.5 rounded-full ${
-                    accentMap[item.category as CategoryKey]
-                  }`}
-                />
-              </div>
-
-              <div className="md:pl-20">
-                <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.35em] text-slate-400">
-                      {item.year}
-                    </p>
-                    <h3 className="mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-                      {item.title}
-                    </h3>
-                  </div>
-
-                  <span className="rounded-full border border-slate-700/70 bg-slate-950/80 px-3 py-1.5 text-xs uppercase tracking-[0.35em] text-slate-300">
-                    {item.category === 'education'
-                      ? 'Education'
-                      : item.category === 'internship'
-                      ? 'Internship'
-                      : 'Professional growth'}
-                  </span>
-                </div>
-
-                <p className="mb-5 text-sm font-medium leading-7 text-slate-400 sm:text-base">
-                  {item.subtitle}
-                </p>
-
-                <p className="mb-6 max-w-3xl text-body leading-7 text-slate-300 sm:text-base">
-                  {item.description}
-                </p>
-
-                <div className="grid gap-3 sm:grid-cols-2">
-                  {item.highlights.map((highlight: string) => (
-                    <div
-                      key={highlight}
-                      className="rounded-3xl border border-midnight-400/15 bg-navy-950/90 px-4 py-3 text-body text-slate-300 shadow-midnight"
-                    >
-                      {highlight}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.article>
-          ))}
-        </div>
-      </motion.div>
+        {timelineData.map((item, i) => (
+          <FocusPull as="li" key={`${item.year}-${item.title}`} delay={0.05} className="relative grid gap-4 pb-16 last:pb-0 md:grid-cols-[1fr_3fr] md:gap-12">
+            <div className="md:pt-1 md:text-right">
+              <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-paper-300">{item.year}</p>
+              <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.2em] text-paper-700">
+                {categoryLabel[item.category as keyof typeof categoryLabel]}
+              </p>
+            </div>
+            <div className="relative md:pl-10">
+              <span className="absolute -left-[1px] top-2 hidden h-[15px] w-[15px] border border-safelight-500 bg-ink-975 md:-left-[1px] md:block">
+                <span className="absolute inset-[4px] bg-safelight-500" />
+              </span>
+              <span className="font-mono text-[11px] text-safelight-400">Take {String(i + 1).padStart(2, '0')}</span>
+              <h3 className="mt-2 font-display text-3xl leading-tight text-paper-50 sm:text-4xl">{item.title}</h3>
+              <p className="mt-2 text-[15px] text-paper-400">{item.subtitle}</p>
+              <p className="mt-5 max-w-2xl text-[16px] leading-relaxed text-paper-500">{item.description}</p>
+              <ul className="mt-5 space-y-2">
+                {item.highlights.map((h: string) => (
+                  <li key={h} className="flex gap-3 text-[15px] leading-relaxed text-paper-400">
+                    <span className="mt-[10px] h-px w-4 shrink-0 bg-paper-700" />
+                    {h}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </FocusPull>
+        ))}
+      </ol>
     </SectionContainer>
   );
 }
