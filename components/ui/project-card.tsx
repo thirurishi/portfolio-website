@@ -71,9 +71,6 @@ export function ProjectCard({ title, description, stack, impact, links }: Projec
               <p className="text-sm uppercase tracking-[0.35em] text-midnight-400/80">Featured case study</p>
               <h3 className="max-w-xl text-xl font-semibold tracking-tight text-white sm:text-2xl">{title}</h3>
             </div>
-            <span className="flex items-center rounded-full border border-navy-700/70 bg-navy-950/80 px-3 py-1.5 text-[11px] uppercase tracking-[0.35em] text-slate-400">
-              Premium
-            </span>
           </div>
 
           {/* Description */}
@@ -99,7 +96,7 @@ export function ProjectCard({ title, description, stack, impact, links }: Projec
 
           {/* Links */}
           <div className="mt-auto flex flex-wrap gap-3 pt-3">
-            {links.map((link) => (
+            {links.filter((link) => link.href && link.href !== '#').map((link) => (
               <Button
                 key={link.label}
                 href={link.href}

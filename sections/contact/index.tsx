@@ -16,7 +16,7 @@ export function Contact() {
     <SectionContainer
       id="contact"
       title="Contact"
-      intro="Reach out to discuss analytics programs, AI product strategy, or data-driven transformation initiatives."
+      intro="Open to a 6-month data science or analytics internship. The fastest way to reach me is email."
     >
       <motion.div
         initial="hidden"
@@ -27,10 +27,10 @@ export function Contact() {
       >
         <motion.div variants={panelVariants} className="royal-card rounded-[32px] border border-midnight-400/28 bg-navy-900 p-8 shadow-[0_0_0_1px_rgba(212,175,55,0.08),_0_32px_80px_rgba(7,5,15,0.9)]">
           <div className="mb-8 rounded-[28px] bg-navy-950/90 p-6 shadow-[inset_0_1px_0_rgba(148,163,184,0.06)]">
-            <p className="text-xs uppercase tracking-[0.35em] text-midnight-400/80">Trusted contact</p>
-            <h3 className="mt-4 text-3xl font-semibold tracking-tight text-white">A premium recruiter-friendly touchpoint</h3>
+            <p className="text-xs uppercase tracking-[0.35em] text-midnight-400/80">Contact</p>
+            <h3 className="mt-4 text-3xl font-semibold tracking-tight text-white">Let’s talk about your team</h3>
             <p className="mt-4 max-w-2xl text-body leading-7 text-slate-300">
-              I’m available for internships, analytics roles, and AI product discussions. Share the project scope, and I’ll respond with clarity and speed.
+              I’m looking for a 6-month internship in data science, analytics or machine learning. Send me the role and I’ll get back to you quickly.
             </p>
           </div>
 
