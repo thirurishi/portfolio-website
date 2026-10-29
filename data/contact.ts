@@ -1,6 +1,6 @@
 export const contactInfo = {
   email: 'rishithiru1998@gmail.com',
   location: 'Villejuif, France',
-  note: 'Reach out to discuss analytics programs, AI product strategy, or data-driven transformation initiatives.',
+  note: 'Open to a 6-month data science or analytics internship. The fastest way to reach me is email.',
   formLabel: 'Send a message'
 };

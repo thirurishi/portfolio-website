@@ -13,7 +13,7 @@ export function Projects() {
     <SectionContainer id="projects" title="Featured Projects">
       
       <p className="mb-8 max-w-3xl text-body text-slate-300">
-        A curated set of analytics, machine learning, and AI systems designed to solve real-world problems through data-driven approaches.
+        Analytics, machine learning and AI projects, from SQL pipelines and Power BI dashboards to deployed NLP apps. Open any case study for the full approach and results.
       </p>
 
       <motion.div

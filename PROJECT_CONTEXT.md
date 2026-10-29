@@ -138,12 +138,13 @@ Global ambient effects (3 pulsing gradient blobs) are fixed behind all content i
 | `/projects` | `app/projects/page.tsx` | Server component — lists all projects |
 | `/projects/[slug]` | `app/projects/[slug]/page.tsx` | Statically generated (SSG) via `generateStaticParams` |
 
-The 5 project slugs that get pre-generated:
-- `sales-performance-dashboard`
-- `employee-performance`
+The 6 project slugs that get pre-generated:
+- `repeat-purchase-recovery`
 - `fake-news`
-- `darknet-analysis`
-- `traffic-yolov8`
+- `ai-resume-job-match-analyzer`
+- `employee-performance`
+- `retail-profitability-analytics`
+- `sales-performance-dashboard`
 
 ---
 
