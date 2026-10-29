@@ -11,7 +11,7 @@ export interface JourneyEvent {
 export const journeyEvents: JourneyEvent[] = [
   {
     year: '2020 — 2024',
-    title: "Bachelor’s in Information Technology",
+    title: "B.Tech in Information Technology",
     subtitle: "St. Joseph’s College of Engineering | Chennai, India",
     description:
       'Developed a strong foundation in computer science, software engineering, and information systems through structured academic training and practical implementation.',
@@ -23,7 +23,7 @@ export const journeyEvents: JourneyEvent[] = [
     accent: 'sky'
   },
   {
-    year: '2024 — 2026',
+    year: '2024 — Present',
     title: "Master’s in Computer Science — Data Science & Analytics",
     subtitle: "EPITA | Paris, France",
     description:
@@ -36,7 +36,7 @@ export const journeyEvents: JourneyEvent[] = [
     accent: 'cyan'
   },
   {
-  year: '2024',
+  year: 'Dec 2022',
   title: 'Android Application Development Internship',
   subtitle: 'NSIC | Mobile Application Development',
   description:

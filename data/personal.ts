@@ -11,7 +11,7 @@ export const personalInfo = {
       institution: 'EPITA, France'
     },
     {
-      degree: 'Bachelor’s in Information Technology',
+      degree: 'B.Tech in Information Technology',
       institution: 'St. Joseph’s College of Engineering, Chennai'
     }
   ],

@@ -2,7 +2,7 @@ import type { JourneyEvent } from './journey';
 
 export const timelineData: JourneyEvent[] = [
   {
-    year: '2024 — 2026',
+    year: '2024 — Present',
     title: "Master’s in Computer Science — Data Science & Analytics",
     subtitle: "EPITA | Paris, France",
     description:
@@ -15,8 +15,22 @@ export const timelineData: JourneyEvent[] = [
     accent: 'cyan'
   },
   {
+    year: 'Dec 2022',
+    title: 'Android Application Development Intern',
+    subtitle: 'National Small Industries Corporation (NSIC) | India',
+    description:
+      'Developed an all-in-one tourism Android app that brings travel planning into a single place, from choosing a destination to finding a cheaper flight.',
+    highlights: [
+      'Destination guides, best season to visit, top places and restaurant suggestions',
+      'Flight search and fare comparison, similar to Google Flights, to find cheaper options',
+      'Structured development, testing and documentation workflow'
+    ],
+    category: 'internship',
+    accent: 'violet'
+  },
+  {
     year: '2020 — 2024',
-    title: "Bachelor’s in Information Technology",
+    title: "B.Tech in Information Technology",
     subtitle: "St. Joseph’s College of Engineering | Chennai, India",
     description:
       'Developed a strong foundation in computer science, software engineering, and information systems through structured academic training and practical implementation.',
@@ -26,18 +40,5 @@ export const timelineData: JourneyEvent[] = [
     ],
     category: 'education',
     accent: 'sky'
-  },
-  {
-    year: '2024',
-    title: 'Android Application Development Internship',
-    subtitle: 'NSIC | Mobile Application Development',
-    description:
-      'Designed and delivered Android application features with a focus on performance, usability, and real-world deployment, working closely with design and backend teams.',
-    highlights: [
-      'Android development using modern UI and UX practices',
-      'Performance optimization and real-world feature implementation'
-    ],
-    category: 'internship',
-    accent: 'violet'
   }
 ];

@@ -5,7 +5,7 @@ export const educationData = [
     period: 'Pursuing'
   },
   {
-    degree: 'Bachelor’s in Information Technology',
+    degree: 'B.Tech in Information Technology',
     institution: 'St. Joseph’s College of Engineering, India',
     period: 'Graduated'
   }
