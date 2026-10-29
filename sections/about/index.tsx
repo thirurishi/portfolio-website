@@ -9,9 +9,10 @@ import { CountUp } from '@/components/fx/count-up';
 import { aboutContent } from '@/data/about';
 
 const stats = [
-  { value: 6, label: 'Selected projects' },
-  { value: 93358, label: 'Customers in my largest analysis' },
-  { value: 4, label: 'Languages spoken' }
+  { value: 7, suffix: '+', label: 'Projects completed' },
+  { value: 15, suffix: '+', label: 'Tools I work with' },
+  { value: 4, label: 'Languages spoken' },
+  { value: 93358, label: 'Customers in my largest analysis' }
 ];
 
 export function About() {
@@ -54,10 +55,10 @@ export function About() {
             ))}
           </div>
 
-          <FocusPull className="mt-12 grid grid-cols-3 gap-4 border-y border-ink-700 py-8">
+          <FocusPull className="mt-12 grid grid-cols-2 gap-x-4 gap-y-8 border-y sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 border-ink-700 py-8">
             {stats.map((s) => (
               <div key={s.label}>
-                <CountUp value={s.value} className="block font-display text-4xl text-paper-50 sm:text-5xl" />
+                <CountUp value={s.value} suffix={s.suffix} className="block font-display text-4xl text-paper-50" />
                 <span className="mt-2 block font-mono text-[10px] uppercase leading-relaxed tracking-[0.18em] text-paper-600">{s.label}</span>
               </div>
             ))}
