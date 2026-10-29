@@ -86,7 +86,7 @@ export function Hero() {
                 transition={{ duration: 0.3 }}
               >
                 <span className="text-xs font-bold tracking-[0.1em] text-midnight-300/95">
-                 OPEN TO 6 MONTHS INTERNSHIP                </span>
+                 OPEN TO 6-MONTH INTERNSHIP · AVAILABLE NOW                </span>
               </motion.div>
             </motion.div>
 

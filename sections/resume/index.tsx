@@ -93,22 +93,22 @@ export function Resume() {
 
           <div className="mt-8 flex flex-col gap-3">
             <Button
-              href={personalInfo.resumeLinks.dataScientist}
+              href={personalInfo.resumeLinks.en}
               variant="default"
               size="lg"
               className="w-full text-sm font-semibold"
               download
             >
-              Download — Data Scientist
+              Download résumé — English (PDF)
             </Button>
             <Button
-              href={personalInfo.resumeLinks.analyst}
+              href={personalInfo.resumeLinks.fr}
               variant="secondary"
               size="lg"
               className="w-full text-sm font-semibold"
               download
             >
-              Download — Data Analyst
+              Télécharger le CV — Français (PDF)
             </Button>
           </div>
         </motion.div>

@@ -11,7 +11,7 @@ export const personalInfo = {
       institution: 'EPITA, France'
     },
     {
-      degree: 'Bachelor’s in Information Technology',
+      degree: 'B.Tech in Information Technology',
       institution: 'St. Joseph’s College of Engineering, Chennai'
     }
   ],
@@ -41,7 +41,7 @@ export const personalInfo = {
     'Performance optimization and adoption'
   ],
   resumeLinks: {
-    dataScientist: '/resume-data-scientist.pdf',
-    analyst: '/resume-analyst.pdf'
+    en: '/Thirumurugan_Kumar_Resume_EN.pdf',
+    fr: '/Thirumurugan_Kumar_CV_FR.pdf'
   }
 };
