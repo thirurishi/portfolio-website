@@ -40,8 +40,5 @@ export const personalInfo = {
     'Analytics governance and stakeholder alignment',
     'Performance optimization and adoption'
   ],
-  resumeLinks: {
-    dataScientist: '/resume-data-scientist.pdf',
-    analyst: '/resume-analyst.pdf'
-  }
+  resumeLink: '/Thirumurugan_Kumar_Resume.pdf'
 };

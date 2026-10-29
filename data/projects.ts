@@ -77,11 +77,11 @@ export const projectsData: ProjectData[] = [
   {
     slug: 'fake-news',
     title: 'AI Fake News Detection Platform',
-    context: 'Team project',
+    context: 'NLP · RAG platform',
     description:
       'Full-stack NLP platform that classifies news claims with an LSTM, GRU and TextCNN ensemble, then explains the verdict using live web evidence and a RAG pipeline (FAISS, LangChain, Groq LLM).',
     overview:
-      'A team-built fact-checking platform trained on the LIAR dataset. Three deep learning models (LSTM, GRU, TextCNN) each give a probability and verdict, combined into an ensemble prediction. The system then scrapes the web for related content, scores evidence relevance with a BERT classifier, retrieves similar claims from a FAISS vector index, and asks an LLM to write two justifications: one from the dataset context and one from web evidence. Everything is served through a FastAPI backend with JWT authentication, stored in PostgreSQL, and shown in a Streamlit app, all running with Docker Compose.',
+      'A fact-checking platform trained on the LIAR dataset. Three deep learning models (LSTM, GRU, TextCNN) each give a probability and verdict, combined into an ensemble prediction. The system then scrapes the web for related content, scores evidence relevance with a BERT classifier, retrieves similar claims from a FAISS vector index, and asks an LLM to write two justifications: one from the dataset context and one from web evidence. Everything is served through a FastAPI backend with JWT authentication, stored in PostgreSQL, and shown in a Streamlit app, all running with Docker Compose.',
     problem:
       'A model that just says "fake" or "true" gives fact-checkers no reason to trust it. The challenge was to make predictions both accurate and explainable.',
     objective:
@@ -117,10 +117,9 @@ export const projectsData: ProjectData[] = [
       'Explainability matters as much as accuracy when outputs affect trust',
       'RAG grounds LLM output in real data instead of free generation',
       'Storing every intermediate result makes a complex pipeline debuggable',
-      'Clear interfaces between components are what make team work scale'
+      'Clear interfaces between components keep a multi-service system maintainable'
     ],
     links: [
-      { label: 'GitHub', href: 'https://github.com/ganpat-patel-012/dsa8-al-s3-25', variant: 'ghost' }
     ]
   },
 
@@ -178,11 +177,11 @@ export const projectsData: ProjectData[] = [
   {
     slug: 'employee-performance',
     title: 'Employee Attrition Prediction: End-to-End ML System',
-    context: 'Team project',
+    context: 'MLOps system',
     description:
       'Containerised ML system that predicts employee attrition, with Airflow ingestion, Great Expectations data validation, a FastAPI prediction service, a Streamlit app and Grafana monitoring.',
     overview:
-      'A team-built system that covers the full ML lifecycle, not just a notebook. CSV files dropped into a folder are picked up by an Airflow DAG, validated with Great Expectations and routed to good or bad data. Valid data goes to PostgreSQL, a Random Forest model serves predictions through FastAPI, a Streamlit app supports single and batch predictions plus history, and Grafana tracks data quality and API metrics. The whole stack runs with Docker Compose.',
+      'A system that covers the full ML lifecycle, not just a notebook. CSV files dropped into a folder are picked up by an Airflow DAG, validated with Great Expectations and routed to good or bad data. Valid data goes to PostgreSQL, a Random Forest model serves predictions through FastAPI, a Streamlit app supports single and batch predictions plus history, and Grafana tracks data quality and API metrics. The whole stack runs with Docker Compose.',
     problem:
       'HR teams often decide on retention by gut feeling, with no automated data pipeline or early warning for employees at risk of leaving.',
     objective:
@@ -221,7 +220,6 @@ export const projectsData: ProjectData[] = [
       'Monitoring makes a system trustworthy for non-technical users'
     ],
     links: [
-      { label: 'GitHub', href: 'https://github.com/navaraja20/Employee-performance-prediction', variant: 'ghost' }
     ]
   },
 

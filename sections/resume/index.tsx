@@ -93,22 +93,13 @@ export function Resume() {
 
           <div className="mt-8 flex flex-col gap-3">
             <Button
-              href={personalInfo.resumeLinks.dataScientist}
+              href={personalInfo.resumeLink}
               variant="default"
               size="lg"
               className="w-full text-sm font-semibold"
               download
             >
-              Download — Data Scientist
-            </Button>
-            <Button
-              href={personalInfo.resumeLinks.analyst}
-              variant="secondary"
-              size="lg"
-              className="w-full text-sm font-semibold"
-              download
-            >
-              Download — Data Analyst
+              Download résumé (PDF)
             </Button>
           </div>
         </motion.div>
