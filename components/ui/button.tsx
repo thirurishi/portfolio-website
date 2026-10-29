@@ -41,7 +41,12 @@ export function Button({ className, variant, size, href, ...props }: ButtonProps
 
   if (href) {
     return (
-      <a className={classes} href={href} {...(props as any)} />
+      <a
+        className={classes}
+        href={href}
+        {...(/^https?:\/\//.test(href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        {...(props as any)}
+      />
     );
   }
 

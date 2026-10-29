@@ -30,7 +30,7 @@ export function Contact() {
             <p className="text-xs uppercase tracking-[0.35em] text-midnight-400/80">Contact</p>
             <h3 className="mt-4 text-3xl font-semibold tracking-tight text-white">Let’s talk about your team</h3>
             <p className="mt-4 max-w-2xl text-body leading-7 text-slate-300">
-              I’m looking for a 6-month internship in data science, analytics or machine learning. Send me the role and I’ll get back to you quickly.
+              I’m looking for a 6-month internship in data science, analytics or machine learning. Available to start immediately. Send me the role and I’ll get back to you quickly.
             </p>
           </div>
 
@@ -44,6 +44,21 @@ export function Contact() {
             <div className="space-y-2">
               <p className="text-xs uppercase tracking-[0.35em] text-slate-400">Location</p>
               <p className="text-body font-medium text-white">{contactInfo.location}</p>
+            </div>
+            <div className="space-y-2">
+              <p className="text-xs uppercase tracking-[0.35em] text-slate-400">Availability</p>
+              <p className="text-body font-medium text-white">{contactInfo.availability}</p>
+            </div>
+            <div className="space-y-2">
+              <p className="text-xs uppercase tracking-[0.35em] text-slate-400">Languages</p>
+              <ul className="grid gap-1 sm:grid-cols-2">
+                {contactInfo.languages.map((lang) => (
+                  <li key={lang.name} className="text-body text-white">
+                    <span className="font-medium">{lang.name}</span>
+                    <span className="text-slate-400"> · {lang.level}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
               {socialLinks.map((link) => (
@@ -67,8 +82,6 @@ export function Contact() {
               <p className="text-xs uppercase tracking-[0.35em] text-midnight-400/80">Send a message</p>
               <h3 className="mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl">Let’s start a conversation</h3>
             </div>
-            <span className="rounded-full border border-navy-700/70 bg-navy-950/80 px-3 py-1.5 text-xs uppercase tracking-[0.35em] text-slate-300">
-              Professional</span>
           </div>
 
           <ContactForm />

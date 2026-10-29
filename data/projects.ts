@@ -170,6 +170,7 @@ export const projectsData: ProjectData[] = [
       'Running locally is a real feature when users upload personal documents'
     ],
     links: [
+      { label: 'Live demo', href: 'https://ai-resume-job-match-analyzer.streamlit.app/', variant: 'default' },
       { label: 'GitHub', href: 'https://github.com/thirurishi/ai-resume-job-match-analyzer', variant: 'ghost' }
     ]
   },
