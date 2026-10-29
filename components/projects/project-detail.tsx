@@ -36,7 +36,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
           </div>
           <div className="flex flex-shrink-0 flex-wrap gap-3">
             {project.links
-              .filter((link) => link.label !== 'Case Study')
+              .filter((link) => link.label !== 'Case Study' && link.href && link.href !== '#')
               .map((link) => (
                 <Button
                   key={link.label}
@@ -189,7 +189,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
         </Link>
         <div className="flex flex-wrap gap-3">
           {project.links
-            .filter((link) => link.label !== 'Case Study')
+            .filter((link) => link.label !== 'Case Study' && link.href && link.href !== '#')
             .map((link) => (
               <Button
                 key={link.label}

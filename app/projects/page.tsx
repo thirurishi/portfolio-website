@@ -11,7 +11,7 @@ export default function ProjectsOverviewPage() {
     <main className="relative mx-auto max-w-6xl px-6 py-10 sm:px-8 lg:px-10">
       <SectionContainer title="Project Case Studies">
         <p className="mb-12 max-w-3xl text-slate-300">
-          Explore premium business analytics and AI-driven product engagements in a structured case study format.
+          Detailed write-ups of each project: the problem, my approach, the results and what I learned.
         </p>
 
         <div className="grid gap-6 xl:grid-cols-2">
@@ -19,7 +19,7 @@ export default function ProjectsOverviewPage() {
             <Card key={project.slug} className="royal-card group overflow-hidden border-midnight-400/28 bg-navy-900 p-6 transition hover:-translate-y-1 hover:border-midnight-400/30 hover:shadow-[0_30px_100px_-70px_rgba(212,175,55,0.18)]">
               <div className="flex flex-col gap-5">
                 <div className="space-y-3">
-                  <p className="text-sm uppercase tracking-[0.35em] text-midnight-400/80">Case study</p>
+                  <p className="text-sm uppercase tracking-[0.35em] text-midnight-400/80">{project.context ?? 'Case study'}</p>
                   <h2 className="text-2xl font-semibold text-white">{project.title}</h2>
                   <p className="text-sm leading-7 text-slate-400">{project.description}</p>
                 </div>

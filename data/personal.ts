@@ -3,7 +3,7 @@ export const personalInfo = {
   title: 'Data Science, Data Analytics, AI, and Machine Learning Professional',
   description:
     'Building intelligent systems, analytics solutions, machine learning pipelines, dashboards, and data-driven products.',
-  email: 'hello@example.com',
+  email: 'rishithiru1998@gmail.com',
   location: 'Villejuif, France',
   education: [
     {
@@ -12,7 +12,7 @@ export const personalInfo = {
     },
     {
       degree: 'Bachelor’s in Information Technology',
-      institution: 'University of Technology'
+      institution: 'St. Joseph’s College of Engineering, Chennai'
     }
   ],
   about: [

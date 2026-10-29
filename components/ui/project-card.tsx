@@ -6,7 +6,9 @@ import { Card } from './card';
 import { fadeInUp } from '@/lib/motion';
 
 export interface ProjectCardProps {
+  slug: string;
   title: string;
+  context?: string;
   description: string;
   stack: string[];
   impact: string;
@@ -25,7 +27,7 @@ const resolveLinkVariant = (link: { label: string; variant?: 'default' | 'second
   return 'secondary';
 };
 
-export function ProjectCard({ title, description, stack, impact, links }: ProjectCardProps) {
+export function ProjectCard({ slug, title, context, description, stack, impact, links }: ProjectCardProps) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -68,7 +70,7 @@ export function ProjectCard({ title, description, stack, impact, links }: Projec
           {/* Header */}
           <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
             <div className="space-y-2">
-              <p className="text-sm uppercase tracking-[0.35em] text-midnight-400/80">Featured case study</p>
+              <p className="text-sm uppercase tracking-[0.35em] text-midnight-400/80">{context ?? 'Project'}</p>
               <h3 className="max-w-xl text-xl font-semibold tracking-tight text-white sm:text-2xl">{title}</h3>
             </div>
           </div>
@@ -107,6 +109,14 @@ export function ProjectCard({ title, description, stack, impact, links }: Projec
                 {link.label}
               </Button>
             ))}
+            <Button
+              href={`/projects/${slug}`}
+              variant="secondary"
+              className="h-12 px-5 text-sm font-semibold"
+              size="sm"
+            >
+              Case study
+            </Button>
           </div>
         </div>
       </Card>
