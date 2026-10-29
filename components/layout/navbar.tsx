@@ -1,12 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Button, Sheet } from '@/components/ui';
-import { Menu } from 'lucide-react';
-import { personalInfo } from '@/data/personal';
+import { motion, AnimatePresence } from 'motion/react';
+import { Menu, X } from 'lucide-react';
 
 const links = [
-  { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
   { label: 'Skills', href: '#skills' },
   { label: 'Projects', href: '#projects' },
@@ -18,136 +16,117 @@ const links = [
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
+  const [active, setActive] = useState('');
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      setScrolled(scrollTop > 36);
-
-      const offset = 160;
-      let currentSection = 'home';
-
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 40);
+      let current = '';
       for (const link of links) {
-        const id = link.href.substring(1);
-        const element = document.getElementById(id);
-
-        if (element) {
-          const top = element.offsetTop;
-          if (scrollTop >= top - offset) {
-            currentSection = id;
-          }
-        }
+        const el = document.getElementById(link.href.slice(1));
+        if (el && y >= el.offsetTop - 200) current = link.href.slice(1);
       }
-
-      setActiveSection(currentSection);
+      setActive(current);
     };
-
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => window.removeEventListener('scroll', handleScroll);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const handleNavClick = (href: string) => {
-    setActiveSection(href.substring(1));
-    setMenuOpen(false);
-  };
+  useEffect(() => {
+    document.documentElement.style.overflow = menuOpen ? 'hidden' : '';
+  }, [menuOpen]);
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 z-50 w-full border-b transition-all duration-500 ${
-          scrolled
-            ? 'border-white/10 bg-navy-950/80 backdrop-blur-xl'
-            : 'border-white/5 bg-navy-950/45 backdrop-blur-md'
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+          scrolled ? 'border-b border-ink-700/70 bg-ink-975/80 backdrop-blur-md' : 'border-b border-transparent'
         }`}
-        style={{
-          boxShadow: scrolled
-            ? '0 12px 40px rgba(0, 8, 20, 0.28), 0 0 0 1px rgba(99, 102, 241, 0.10)'
-            : '0 4px 20px rgba(0, 8, 20, 0.12)'
-        }}
       >
-        <div className="flex w-full items-center justify-between px-6 py-4 md:px-10 lg:px-16 xl:px-24">
-          <a
-            href="#home"
-            onClick={() => handleNavClick('#home')}
-            className="group flex-shrink-0 space-y-1 transition-transform duration-300 hover:translate-y-[-1px]"
-          >
-            <p className="text-[11px] font-bold uppercase tracking-[0.38em] text-midnight-200 transition-colors duration-300 group-hover:text-white">
-              {personalInfo.name}
-            </p>
-            <p className="max-w-[420px] text-[12px] font-medium leading-relaxed text-slate-400 transition-colors duration-300 group-hover:text-slate-300">
-              {personalInfo.title}
-            </p>
+        <div className="mx-auto flex w-full items-center justify-between px-6 py-4 sm:px-10 xl:px-16">
+          <a href="#home" className="group flex items-center gap-3" aria-label="Back to top">
+            <span className="flex h-9 w-9 items-center justify-center border border-paper-100/40 font-display text-lg italic text-paper-50 transition group-hover:border-safelight-500">
+              TK
+            </span>
+            <span className="hidden font-mono text-[11px] uppercase tracking-[0.24em] text-paper-200 sm:inline">
+              Thirumurugan Kumar
+            </span>
           </a>
 
-          <nav className="ml-10 hidden items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-2 md:flex">
-            {links.map((link) => {
-              const isActive = activeSection === link.href.substring(1);
-
+          <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
+            {links.map((link, i) => {
+              const isActive = active === link.href.slice(1);
               return (
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={() => handleNavClick(link.href)}
-                  className={`relative rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 ${
-                    isActive
-                      ? 'bg-white/8 text-white'
-                      : 'text-slate-300 hover:bg-white/5 hover:text-white'
+                  className={`group relative px-3 py-2 font-mono text-[11px] uppercase tracking-[0.2em] transition-colors ${
+                    isActive ? 'text-paper-50' : 'text-paper-500 hover:text-paper-100'
                   }`}
                 >
+                  <span className={`mr-1.5 ${isActive ? 'text-safelight-400' : 'text-paper-700'}`}>0{i + 2}</span>
                   {link.label}
-                  <span
-                    className={`absolute inset-x-3 -bottom-[2px] h-[2px] rounded-full transition-all duration-300 ${
-                      isActive
-                        ? 'bg-midnight-300 opacity-100'
-                        : 'bg-midnight-300 opacity-0'
-                    }`}
-                  />
+                  {isActive ? (
+                    <motion.span layoutId="nav-active" className="absolute inset-x-3 -bottom-0.5 h-px bg-safelight-500" />
+                  ) : null}
                 </a>
               );
             })}
           </nav>
 
-          <Button
-            variant="secondary"
-            className="ml-auto border-navy-700/60 bg-navy-950/80 backdrop-blur-sm transition-all duration-300 hover:border-midnight-400/50 hover:bg-navy-950 md:hidden"
+          <button
+            type="button"
             onClick={() => setMenuOpen(true)}
+            className="flex items-center gap-2 border border-paper-100/30 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.2em] text-paper-100 md:hidden"
+            aria-label="Open menu"
           >
-            <Menu className="mr-2 h-4 w-4" />
-            Menu
-          </Button>
+            <Menu className="h-4 w-4" /> Menu
+          </button>
         </div>
       </header>
 
-      <Sheet
-        open={menuOpen}
-        onOpenChange={setMenuOpen}
-        title="Navigation"
-        description="Quick links to every section."
-      >
-        <div className="space-y-4">
-          {links.map((link) => {
-            const isActive = activeSection === link.href.substring(1);
-
-            return (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => handleNavClick(link.href)}
-                className={`block rounded-2xl border px-6 py-4 text-base font-medium transition-all duration-300 ${
-                  isActive
-                    ? 'border-midnight-400/60 bg-navy-950/90 text-midnight-300 shadow-midnight'
-                    : 'border-navy-800/80 bg-navy-950/80 text-slate-100 hover:border-midnight-400/50 hover:bg-navy-950 hover:text-white'
-                }`}
+      <AnimatePresence>
+        {menuOpen ? (
+          <motion.div
+            key="menu"
+            className="fixed inset-0 z-[60] flex flex-col bg-ink-975 px-6 py-5 md:hidden"
+            initial={{ clipPath: 'inset(0 0 100% 0)' }}
+            animate={{ clipPath: 'inset(0 0 0% 0)' }}
+            exit={{ clipPath: 'inset(0 0 100% 0)' }}
+            transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
+          >
+            <div className="flex items-center justify-between">
+              <span className="camera-label">Index</span>
+              <button
+                type="button"
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center gap-2 border border-paper-100/30 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.2em] text-paper-100"
+                aria-label="Close menu"
               >
-                {link.label}
-              </a>
-            );
-          })}
-        </div>
-      </Sheet>
+                <X className="h-4 w-4" /> Close
+              </button>
+            </div>
+            <nav className="mt-12 flex flex-col" aria-label="Mobile">
+              {links.map((link, i) => (
+                <motion.a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.15 + i * 0.05 }}
+                  className="flex items-baseline gap-4 border-b border-ink-700 py-4"
+                >
+                  <span className="font-mono text-xs text-safelight-400">0{i + 2}</span>
+                  <span className="font-display text-4xl text-paper-50">{link.label}</span>
+                </motion.a>
+              ))}
+            </nav>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </>
   );
 }

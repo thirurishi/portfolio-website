@@ -3,12 +3,12 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const textareaVariants = cva(
-  'min-h-[140px] w-full rounded-2xl border border-navy-800 bg-navy-950 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-midnight-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950',
+  'min-h-[140px] w-full resize-y border-0 border-b border-ink-600 bg-transparent px-0 py-3 text-[15px] text-paper-100 placeholder:text-paper-700 transition-colors focus-visible:border-safelight-500 focus-visible:outline-none',
   {
     variants: {
       variant: {
         default: '',
-        ghost: 'bg-navy-900/80 border-navy-700'
+        ghost: ''
       }
     },
     defaultVariants: {

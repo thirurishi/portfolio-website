@@ -1,179 +1,127 @@
 'use client';
 
+import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
+import { ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui';
+import { Viewfinder } from '@/components/fx/viewfinder';
 import { heroContent } from '@/data/hero';
-import { motion, useScroll, useTransform } from 'motion/react';
-import {
-  sectionContainer,
-  heroBadge,
-  heroHeading,
-  heroContent as heroContentVariant,
-  heroCTA
-} from '@/lib/motion';
-import { useRef } from 'react';
+import { useIntroDone } from '@/lib/intro';
 
-const buttonFade = {
-  hidden: { opacity: 0, y: 22 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
-};
+const ease = [0.16, 1, 0.3, 1] as const;
+
+function Line({ children, delay, ready, className }: { children: React.ReactNode; delay: number; ready: boolean; className?: string }) {
+  const reduce = useReducedMotion();
+  return (
+    <span className="block overflow-hidden pb-[0.08em]">
+      <motion.span
+        className={`block ${className ?? ''}`}
+        initial={reduce ? false : { y: '110%' }}
+        animate={ready ? { y: '0%' } : undefined}
+        transition={{ duration: 1.1, delay, ease }}
+      >
+        {children}
+      </motion.span>
+    </span>
+  );
+}
 
 export function Hero() {
-  const heroRef = useRef(null);
+  const ready = useIntroDone();
+  const reduce = useReducedMotion();
   const { scrollY } = useScroll();
-  const heroY = useTransform(scrollY, [0, 400], [0, 80]);
+  const contentY = useTransform(scrollY, [0, 600], [0, reduce ? 0 : 120]);
+  const contentOpacity = useTransform(scrollY, [0, 500], [1, 0.15]);
+  const mediaScale = useTransform(scrollY, [0, 800], [1, reduce ? 1 : 1.12]);
+
+  const fade = (delay: number) => ({
+    initial: reduce ? (false as const) : { opacity: 0, y: 14, filter: 'blur(8px)' },
+    animate: ready ? { opacity: 1, y: 0, filter: 'blur(0px)' } : undefined,
+    transition: { duration: 0.9, delay, ease }
+  });
 
   return (
-    <section
-      ref={heroRef}
-      className="relative min-h-screen w-full overflow-hidden text-white flex flex-col"
-    >
-      {/* Full-screen background video */}
-      <div className="absolute inset-0 z-0 w-full h-full overflow-hidden">
-        <video
-          className="block h-full w-full object-cover object-[62%_center]"
-          src="/hero-bg.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-        />
-      </div>
-
-      {/* Royal crosshatch texture over video */}
-      <div className="absolute inset-0 z-[1] royal-texture opacity-50 pointer-events-none" />
-
-      {/* Dark overlay — let video breathe */}
-      <div className="absolute inset-0 bg-navy-975/58" />
-
-      {/* Box-shadow vignette — no gradient, just shadow */}
-      <div
-        className="pointer-events-none absolute inset-0 z-[2]"
-        style={{ boxShadow: 'inset 0 0 180px rgba(7,5,15,0.55)' }}
-      />
-
-      {/* Bottom warm glow — box-shadow only */}
-      <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-px"
-        style={{ boxShadow: '0 0 80px 40px rgba(212,175,55,0.07)' }}
-      />
-
-      {/* Cinematic corner brackets */}
-      <div className="pointer-events-none absolute inset-0 z-[6]">
-        <div className="absolute top-6 left-6 h-12 w-12 border-t-2 border-l-2 border-midnight-400/45" />
-        <div className="absolute top-6 right-6 h-12 w-12 border-t-2 border-r-2 border-midnight-400/45" />
-        <div className="absolute bottom-16 left-6 h-12 w-12 border-b-2 border-l-2 border-midnight-400/45" />
-        <div className="absolute bottom-16 right-6 h-12 w-12 border-b-2 border-r-2 border-midnight-400/45" />
-      </div>
-
-
-      {/* Main content */}
-      <div className="relative z-10 flex min-h-screen w-full items-center py-14 md:py-16 lg:py-20">
-        <div className="w-full px-6 md:px-12 lg:px-16 xl:px-24 sm:px-8 md:px-10 lg:px-12">
-          <motion.div
-            className="max-w-5xl space-y-11 md:space-y-12 lg:space-y-14"
-            style={{ y: heroY }}
-          >
-            <motion.div
-              variants={heroBadge}
-              initial="hidden"
-              animate="visible"
-              className="inline-flex"
-            >
-              <motion.div
-                className="rounded-full border border-midnight-400/40 bg-navy-950/90 px-5 py-2 backdrop-blur-md shadow-midnight"
-                whileHover={{ scale: 1.02, boxShadow: '0 0 30px rgba(212,175,55,0.25)' }}
-                transition={{ duration: 0.3 }}
-              >
-                <span className="text-xs font-bold tracking-[0.1em] text-midnight-300/95">
-                 OPEN TO 6-MONTH INTERNSHIP · AVAILABLE NOW                </span>
-              </motion.div>
-            </motion.div>
-
-            <motion.div
-              variants={heroContentVariant}
-              initial="hidden"
-              animate="visible"
-              className="space-y-9 md:space-y-11 lg:space-y-13"
-            >
-              <div className="pt-1 md:pt-2">
-                <p className="text-xs font-bold uppercase tracking-[0.1em] text-slate-400/85">
-                  Data Science • Analytics • AI • Machine Learning
-                </p>
-              </div>
-
-              <motion.div
-                variants={heroHeading}
-                initial="hidden"
-                animate="visible"
-                className="pt-1 md:pt-2 lg:pt-4"
-              >
-                <h1 className="text-hero font-bold leading-[0.85] tracking-[-0.025em] text-white">
-                  Thirumurugan
-                  <br />
-                  <span className="text-shimmer italic font-bold">
-                    Kumar
-                  </span>
-                </h1>
-              </motion.div>
-
-              <motion.div
-                variants={heroContentVariant}
-                initial="hidden"
-                animate="visible"
-                className="max-w-4xl pt-3 md:pt-5 lg:pt-6"
-              >
-                <p className="text-subheading font-light leading-relaxed tracking-[-0.005em] text-slate-200/95">
-                  Designing data-driven systems, analytics solutions, and machine learning pipelines that deliver measurable business impact.
-                </p>
-                {/* Gold rule */}
-                <motion.div
-                  className="mt-7 h-px w-20 bg-midnight-400/55"
-                  style={{ originX: 0 }}
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ duration: 0.9, delay: 1.1 }}
-                />
-              </motion.div>
-            </motion.div>
-
-            <motion.div
-              variants={heroCTA}
-              initial="hidden"
-              animate="visible"
-              className="space-y-8 pt-8 md:space-y-9 md:pt-11 lg:pt-14"
-            >
-              <motion.div
-                variants={sectionContainer}
-                initial="hidden"
-                animate="visible"
-                className="relative pt-3"
-              >
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-5">
-                  {heroContent.ctas.map((cta, index) => (
-                    <motion.div
-                      key={cta.label}
-                      variants={buttonFade}
-                      transition={{ delay: index * 0.15 }}
-                      className="w-full sm:w-auto"
-                    >
-                      <Button
-                        href={cta.href}
-                        variant={cta.variant as 'default' | 'secondary' | 'ghost'}
-                        className="w-full text-base font-bold tracking-wide sm:w-auto"
-                        size="lg"
-                      >
-                        {cta.label}
-                      </Button>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            </motion.div>
-          </motion.div>
+    <section id="home" className="relative flex min-h-[100svh] w-full flex-col overflow-hidden !px-0 !py-0 text-paper-100">
+      {/* Cinematic footage */}
+      <motion.div className="absolute inset-0 z-0" style={{ scale: mediaScale }}>
+        <div className="fx-kenburns absolute inset-0">
+          <video
+            className="h-full w-full object-cover object-[55%_center]"
+            src="/hero.mp4"
+            poster="/hero-poster.jpg"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            style={{ filter: 'grayscale(0.35) sepia(0.12) contrast(1.12) brightness(0.62)' }}
+          />
         </div>
-      </div>
+      </motion.div>
 
+      {/* Grade, leaks and letterbox */}
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(180deg,rgba(10,9,8,0.55)_0%,rgba(10,9,8,0.1)_35%,rgba(10,9,8,0.35)_70%,#0a0908_100%)]" />
+      <div className="fx-leak fx-leak--a z-[2]" />
+      <div className="fx-leak fx-leak--b z-[2]" />
+      <motion.div
+        className="pointer-events-none absolute inset-x-0 top-0 z-[3] bg-black motion-reduce:hidden"
+        initial={{ height: reduce ? '0%' : '50%' }}
+        animate={ready ? { height: '0%' } : undefined}
+        transition={{ duration: 1.2, ease }}
+      />
+      <motion.div
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[3] bg-black motion-reduce:hidden"
+        initial={{ height: reduce ? '0%' : '50%' }}
+        animate={ready ? { height: '0%' } : undefined}
+        transition={{ duration: 1.2, ease }}
+      />
+
+      <Viewfinder />
+
+      {/* Copy */}
+      <motion.div
+        style={{ y: contentY, opacity: contentOpacity }}
+        className="relative z-10 mt-auto w-full px-6 pb-24 pt-40 sm:px-12 sm:pb-28 lg:px-20 xl:px-28"
+      >
+        <motion.div {...fade(0.5)} className="mb-8 inline-flex items-center gap-3 border border-paper-100/25 bg-ink-975/40 px-4 py-2 backdrop-blur-sm">
+          <span className="fx-rec inline-block h-2 w-2 rounded-full bg-safelight-500" />
+          <span className="font-mono text-[11px] uppercase tracking-[0.24em] text-paper-100">
+            Available now · 6-month internship
+          </span>
+        </motion.div>
+
+        <motion.p {...fade(0.6)} className="camera-label mb-5 !text-paper-300">
+          <span className="hidden sm:inline">Scene 01 — </span>Data science · Analytics · AI
+        </motion.p>
+
+        <h1 className="text-hero text-paper-50">
+          <Line ready={ready} delay={0.25}>Thirumurugan</Line>
+          <Line ready={ready} delay={0.4} className="italic text-paper-300">
+            Kumar<span className="text-safelight-500">.</span>
+          </Line>
+        </h1>
+
+        <motion.p {...fade(0.85)} className="mt-8 max-w-2xl text-lg font-light leading-relaxed text-paper-200 sm:text-xl">
+          I see patterns in light and in data. Master&apos;s student at EPITA turning raw data into SQL pipelines, Power BI
+          dashboards, ML models and deployed NLP apps.
+        </motion.p>
+
+        <motion.div {...fade(1)} className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+          {heroContent.ctas.map((cta) => (
+            <Button key={cta.label} href={cta.href} variant={cta.variant as 'default' | 'secondary' | 'ghost'} size="lg" className="w-full sm:w-auto">
+              {cta.label}
+            </Button>
+          ))}
+        </motion.div>
+      </motion.div>
+
+      <motion.a
+        href="#about"
+        {...fade(1.3)}
+        className="absolute bottom-16 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-paper-300 md:flex"
+      >
+        Scroll
+        <ArrowDown className="h-4 w-4 animate-bounce" />
+      </motion.a>
     </section>
   );
 }

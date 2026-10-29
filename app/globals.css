@@ -1,224 +1,207 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ───────────────────────────────────────────────
+   DARKROOM — base
+─────────────────────────────────────────────── */
 :root {
   color-scheme: dark;
-  --font-inter: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-cormorant: 'Cormorant Garamond', 'Garamond', 'Georgia', serif;
-  --font-jetbrains-mono: 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-  --gold: #d4af37;
-  --gold-light: #f5e6a3;
-  --gold-deep: #9a7d0a;
-  --cream: #ede8de;
+  --ink: #0a0908;
+  --paper: #ece6db;
+  --safelight: #e2352b;
+  --grain-opacity: 0.07;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  background: var(--ink);
+}
 
 body {
-  @apply bg-navy-975 text-slate-100 antialiased;
+  @apply bg-ink-975 text-paper-200 antialiased;
   min-height: 100vh;
-  font-family: var(--font-inter);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
 }
 
-* { @apply border-slate-800; }
+* { @apply border-ink-700; }
 
 ::selection {
-  background: rgba(212, 175, 55, 0.22);
-  color: #fef9c3;
+  background: rgba(226, 53, 43, 0.35);
+  color: #fff;
 }
 
-section {
-  @apply w-full px-6 py-20;
-}
-@media (min-width: 768px) {
-  section { @apply px-8; }
-}
+section { @apply w-full px-6 py-24; }
+@media (min-width: 768px) { section { @apply px-10; } }
+@media (min-width: 1280px) { section { @apply px-16; } }
 
-/* ─────────────────────────────────────────
-   SCROLLBAR — gold
-───────────────────────────────────────── */
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: #07050f; }
-::-webkit-scrollbar-thumb {
-  background: #9a7d0a;
-  border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover { background: #d4af37; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: #3a3632; border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: var(--safelight); }
 
-/* ─────────────────────────────────────────
-   FILM GRAIN
-───────────────────────────────────────── */
-body::before {
-  content: '';
-  position: fixed;
-  top: -50%; left: -50%;
-  width: 200%; height: 200%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: 0.028;
+/* ───────────────────────────────────────────────
+   LIVING FILM GRAIN + VIGNETTE (whole site)
+─────────────────────────────────────────────── */
+.fx-grain {
   pointer-events: none;
-  z-index: 9999;
-  animation: grain 8s steps(10) infinite;
+  position: fixed;
+  inset: -100%;
+  width: 300%;
+  height: 300%;
+  z-index: 90;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 0.9s steps(6) infinite;
+  mix-blend-mode: overlay;
+}
+
+.fx-vignette {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 89;
+  box-shadow: inset 0 0 180px 40px rgba(0, 0, 0, 0.55);
 }
 
 @keyframes grain {
-  0%, 100% { transform: translate(0, 0); }
-  10%       { transform: translate(-5%, -10%); }
-  20%       { transform: translate(-15%, 5%); }
-  30%       { transform: translate(7%, -25%); }
-  40%       { transform: translate(-5%, 25%); }
-  50%       { transform: translate(-15%, 10%); }
-  60%       { transform: translate(15%, 0%); }
-  70%       { transform: translate(0%, 15%); }
-  80%       { transform: translate(3%, 35%); }
-  90%       { transform: translate(-10%, 10%); }
+  0%   { transform: translate(0, 0); }
+  17%  { transform: translate(-6%, 4%); }
+  33%  { transform: translate(5%, -7%); }
+  50%  { transform: translate(-9%, -3%); }
+  67%  { transform: translate(7%, 8%); }
+  83%  { transform: translate(-3%, 9%); }
+  100% { transform: translate(0, 0); }
 }
 
-/* ─────────────────────────────────────────
-   GRID DRIFT
-───────────────────────────────────────── */
-@keyframes grid-drift {
-  0%   { background-position: 0px 0px; }
-  100% { background-position: 72px 72px; }
-}
-.animate-grid-drift { animation: grid-drift 20s linear infinite; }
-
-/* ─────────────────────────────────────────
-   ROYAL GOLD BORDER GLOW — solid pulse
-───────────────────────────────────────── */
-@keyframes glow-border {
-  0%, 100% {
-    box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.10),
-                inset 0 0 0 1px rgba(212, 175, 55, 0.04);
-  }
-  50% {
-    box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.35),
-                inset 0 0 0 1px rgba(212, 175, 55, 0.08),
-                0 0 28px rgba(212, 175, 55, 0.12);
-  }
-}
-.animate-glow-border { animation: glow-border 4s ease-in-out infinite; }
-
-/* ─────────────────────────────────────────
-   ROYAL GOLD TEXT SHEEN
-   Metallic gold foil — gold to light gold only, no rainbow
-───────────────────────────────────────── */
-@keyframes gold-sheen {
-  0%   { background-position: -300% center; }
-  100% { background-position: 300% center; }
-}
-
-.text-shimmer {
-  background: linear-gradient(
-    90deg,
-    #9a7d0a 0%,
-    #d4af37 25%,
-    #f5e6a3 50%,
-    #d4af37 75%,
-    #9a7d0a 100%
-  );
-  background-size: 250% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gold-sheen 8s linear infinite;
-}
-
-/* ─────────────────────────────────────────
-   FLOAT ANIMATIONS
-───────────────────────────────────────── */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-12px); }
-}
-@keyframes float-delayed {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-16px); }
-}
-@keyframes shimmer {
-  0%   { opacity: 0.4; filter: brightness(1); }
-  50%  { opacity: 0.7; filter: brightness(1.1); }
-  100% { opacity: 0.4; filter: brightness(1); }
-}
-@keyframes glow-pulse {
-  0%, 100% {
-    box-shadow: 0 0 16px rgba(212, 175, 55, 0.15),
-                0 0 32px rgba(212, 175, 55, 0.06);
-  }
-  50% {
-    box-shadow: 0 0 28px rgba(212, 175, 55, 0.28),
-                0 0 56px rgba(212, 175, 55, 0.12);
-  }
-}
-.animate-float           { animation: float 6s ease-in-out infinite; }
-.animate-float-delayed   { animation: float-delayed 7s ease-in-out infinite; animation-delay: 1s; }
-.animate-float-delayed-2 { animation: float-delayed 8s ease-in-out infinite; animation-delay: 2s; }
-.animate-shimmer         { animation: shimmer 4s ease-in-out infinite; }
-.animate-glow-pulse      { animation: glow-pulse 3s ease-in-out infinite; }
-
-/* ─────────────────────────────────────────
-   ROYAL TEXTURE — gold crosshatch engraving
-   Two crossing diagonals — classic luxury
-───────────────────────────────────────── */
-.royal-texture {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Cpath d='M0 28 L28 0' stroke='rgba(212%2C175%2C55%2C0.08)' stroke-width='0.6'/%3E%3Cpath d='M0 0 L28 28' stroke='rgba(212%2C175%2C55%2C0.05)' stroke-width='0.5'/%3E%3C/svg%3E");
-  background-size: 28px 28px;
-  background-repeat: repeat;
-}
-
-/* ─────────────────────────────────────────
-   ROYAL CARD SURFACE
-   Gold top-edge highlight + noise grain
-   Like polished dark obsidian / stone
-───────────────────────────────────────── */
-.royal-card {
-  position: relative;
-  overflow: hidden;
-}
-
-/* Gold 1px top-edge — light catching the polished top surface */
-.royal-card::before {
-  content: '';
-  position: absolute;
-  left: 0; right: 0; top: 0;
-  height: 1px;
-  background: rgba(212, 175, 55, 0.35);
+/* ───────────────────────────────────────────────
+   LIGHT LEAKS (hero)
+─────────────────────────────────────────────── */
+.fx-leak {
   pointer-events: none;
-  z-index: 10;
-}
-
-/* Noise grain overlay — velvet texture */
-.royal-card::after {
-  content: '';
   position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 200px 200px;
-  opacity: 0.06;
-  pointer-events: none;
-  z-index: 0;
+  border-radius: 9999px;
+  filter: blur(70px);
   mix-blend-mode: screen;
+  opacity: 0;
+}
+.fx-leak--a {
+  width: 46vw; height: 46vw; left: -12vw; top: -10vw;
+  background: radial-gradient(circle, rgba(255, 120, 40, 0.55), rgba(226, 53, 43, 0) 70%);
+  animation: leak-a 11s ease-in-out infinite;
+}
+.fx-leak--b {
+  width: 38vw; height: 38vw; right: -10vw; bottom: -8vw;
+  background: radial-gradient(circle, rgba(226, 53, 43, 0.5), rgba(226, 53, 43, 0) 70%);
+  animation: leak-b 14s ease-in-out infinite 2s;
+}
+@keyframes leak-a {
+  0%, 100% { opacity: 0; transform: translate(0, 0) scale(1); }
+  30%      { opacity: 0.55; }
+  55%      { opacity: 0.15; transform: translate(6vw, 4vw) scale(1.15); }
+  70%      { opacity: 0.45; }
+}
+@keyframes leak-b {
+  0%, 100% { opacity: 0; transform: translate(0, 0) scale(1); }
+  40%      { opacity: 0.5; transform: translate(-5vw, -3vw) scale(1.1); }
+  65%      { opacity: 0.1; }
 }
 
-/* ─────────────────────────────────────────
+/* Slow cinematic push-in on hero media */
+@keyframes ken-burns {
+  0%   { transform: scale(1.06) translate(0, 0); }
+  100% { transform: scale(1.16) translate(-1.5%, -1%); }
+}
+.fx-kenburns { animation: ken-burns 26s ease-in-out infinite alternate; }
+
+/* REC blink */
+@keyframes rec { 0%, 55% { opacity: 1; } 56%, 100% { opacity: 0.15; } }
+.fx-rec { animation: rec 1.2s steps(1) infinite; }
+
+/* ───────────────────────────────────────────────
+   FILM STRIP
+─────────────────────────────────────────────── */
+.film-base {
+  background-color: #17130f;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03), inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+}
+.sprockets {
+  height: 26px;
+  background-image: linear-gradient(rgba(236, 230, 219, 0.16), rgba(236, 230, 219, 0.16));
+  background-size: 14px 10px;
+  background-repeat: repeat-x;
+  background-position: 8px center;
+  -webkit-mask-image: repeating-linear-gradient(90deg, #000 0 14px, transparent 14px 32px);
+  mask-image: repeating-linear-gradient(90deg, #000 0 14px, transparent 14px 32px);
+}
+.film-edge-text {
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: rgba(255, 140, 60, 0.55);
+}
+
+/* Black-and-white → colour develop */
+.develop {
+  filter: grayscale(1) contrast(1.15) brightness(0.85);
+  transition: filter 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.develop-on .develop,
+.develop:hover,
+.group:hover .develop {
+  filter: grayscale(0) contrast(1.02) brightness(1);
+}
+@keyframes rgb-split {
+  0%   { text-shadow: 3px 0 rgba(226, 53, 43, 0.9), -3px 0 rgba(0, 200, 255, 0.8); }
+  40%  { text-shadow: -2px 0 rgba(226, 53, 43, 0.9), 2px 0 rgba(0, 200, 255, 0.8); }
+  100% { text-shadow: 0 0 rgba(226, 53, 43, 0), 0 0 rgba(0, 200, 255, 0); }
+}
+.group:hover .fx-rgb,
+.develop-on .fx-rgb { animation: rgb-split 0.6s ease-out 1; }
+
+/* ───────────────────────────────────────────────
+   CUSTOM CURSOR (fine pointers only)
+─────────────────────────────────────────────── */
+@media (pointer: fine) {
+  html.has-reticle,
+  html.has-reticle a,
+  html.has-reticle button { cursor: none; }
+  html.has-reticle input,
+  html.has-reticle textarea { cursor: text; }
+}
+
+/* ───────────────────────────────────────────────
    TYPOGRAPHY
-───────────────────────────────────────── */
-.font-display {
-  font-family: var(--font-cormorant);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 0.88;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-}
-.font-sans { font-family: var(--font-inter); }
-.font-mono { font-family: var(--font-jetbrains-mono); }
+─────────────────────────────────────────────── */
+.font-display { font-family: var(--font-display), Georgia, serif; font-weight: 400; letter-spacing: -0.01em; }
+.font-mono { font-family: var(--font-mono), monospace; }
+.font-sans { font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif; }
 
-.text-hero       { @apply font-display text-6xl font-bold leading-[0.85] tracking-[-0.025em] sm:text-7xl lg:text-8xl xl:text-[9.5rem]; }
-.text-display    { @apply font-display text-4xl font-semibold leading-[0.9] tracking-[-0.015em] sm:text-5xl lg:text-6xl; }
-.text-heading    { @apply font-display text-2xl font-semibold leading-tight tracking-[-0.01em] sm:text-3xl lg:text-4xl; }
-.text-subheading { @apply font-sans text-lg font-light leading-relaxed tracking-[0.005em] sm:text-xl lg:text-2xl; }
-.text-body       { @apply font-sans text-base leading-relaxed sm:text-lg; }
-.text-caption    { @apply font-mono text-sm font-semibold uppercase tracking-[0.06em]; }
+.text-hero       { @apply font-display text-[3.4rem] leading-[0.9] tracking-[-0.02em] sm:text-7xl lg:text-8xl xl:text-[8.5rem]; }
+.text-display    { @apply font-display text-4xl leading-[0.95] sm:text-5xl lg:text-6xl; }
+.text-heading    { @apply font-display text-2xl leading-tight sm:text-3xl lg:text-4xl; }
+.text-subheading { @apply font-sans text-lg font-light leading-relaxed sm:text-xl; }
+.text-body       { @apply font-sans text-base leading-relaxed; }
+.text-caption    { @apply font-mono text-[11px] uppercase tracking-camera; }
+.camera-label    { @apply font-mono text-[11px] uppercase tracking-camera text-paper-600; }
+
+/* ───────────────────────────────────────────────
+   LEGACY CLASSES — re-skinned for the darkroom
+─────────────────────────────────────────────── */
+.text-shimmer {
+  color: #ece6db;
+  font-style: italic;
+}
+.royal-texture { background-image: none; }
+.royal-card { position: relative; overflow: hidden; }
+.animate-glow-border { animation: none; }
+
+/* ───────────────────────────────────────────────
+   ACCESSIBILITY — respect reduced motion
+─────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .fx-grain, .fx-leak, .fx-kenburns, .fx-rec { animation: none !important; }
+  .fx-leak { opacity: 0.25; }
+  html { scroll-behavior: auto; }
+}

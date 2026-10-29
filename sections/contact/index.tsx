@@ -1,92 +1,79 @@
 'use client';
 
-import { motion } from 'motion/react';
+import { ArrowUpRight } from 'lucide-react';
 import { SectionContainer } from '@/components/shared';
+import { FocusPull } from '@/components/fx/focus-pull';
+import { ContactForm } from '@/components/ui';
 import { contactInfo } from '@/data/contact';
 import { socialLinks } from '@/data/social-links';
-import { fadeInUp, sectionContainer } from '@/lib/motion';
-import { ContactForm } from '@/components/ui';
-
-const containerVariants = sectionContainer;
-
-const panelVariants = fadeInUp;
 
 export function Contact() {
   return (
-    <SectionContainer
-      id="contact"
-      title="Contact"
-      intro="Open to a 6-month data science or analytics internship. The fastest way to reach me is email."
-    >
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={containerVariants}
-        className="relative grid gap-8 xl:grid-cols-[1.1fr_0.9fr]"
-      >
-        <motion.div variants={panelVariants} className="royal-card rounded-[32px] border border-midnight-400/28 bg-navy-900 p-8 shadow-[0_0_0_1px_rgba(212,175,55,0.08),_0_32px_80px_rgba(7,5,15,0.9)]">
-          <div className="mb-8 rounded-[28px] bg-navy-950/90 p-6 shadow-[inset_0_1px_0_rgba(148,163,184,0.06)]">
-            <p className="text-xs uppercase tracking-[0.35em] text-midnight-400/80">Contact</p>
-            <h3 className="mt-4 text-3xl font-semibold tracking-tight text-white">Let’s talk about your team</h3>
-            <p className="mt-4 max-w-2xl text-body leading-7 text-slate-300">
-              I’m looking for a 6-month internship in data science, analytics or machine learning. Available to start immediately. Send me the role and I’ll get back to you quickly.
+    <SectionContainer id="contact" scene="07" kicker="Contact" title="Let's work together.">
+      <div className="grid gap-16 lg:grid-cols-[5fr_6fr] lg:gap-20">
+        <div>
+          <FocusPull>
+            <p className="text-[17px] leading-relaxed text-paper-400">
+              I&apos;m looking for a 6-month internship in data science, analytics or machine learning, and I&apos;m available to
+              start immediately. Send me the role and I&apos;ll get back to you quickly.
             </p>
-          </div>
-
-          <div className="grid gap-4 rounded-[28px] border border-midnight-400/18 bg-navy-950/85 p-6 shadow-midnight">
-            <div className="space-y-2">
-              <p className="text-xs uppercase tracking-[0.35em] text-slate-400">Email</p>
-              <a href={`mailto:${contactInfo.email}`} className="text-body font-medium text-white transition hover:text-midnight-400">
+            <a
+              href={`mailto:${contactInfo.email}`}
+              className="group mt-8 inline-flex items-center gap-3 font-display text-3xl text-paper-50 sm:text-4xl"
+            >
+              <span className="underline decoration-ink-600 decoration-1 underline-offset-[10px] transition-colors group-hover:decoration-safelight-500">
                 {contactInfo.email}
-              </a>
+              </span>
+              <ArrowUpRight className="h-6 w-6 text-safelight-500 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
+            </a>
+          </FocusPull>
+
+          <FocusPull delay={0.1} className="mt-12 grid gap-8 border-t border-ink-700 pt-8 sm:grid-cols-2">
+            <div>
+              <p className="camera-label">Location</p>
+              <p className="mt-3 text-[15px] text-paper-200">{contactInfo.location}</p>
+              <p className="camera-label mt-6">Availability</p>
+              <p className="mt-3 flex items-start gap-2.5 text-[15px] text-paper-200">
+                <span className="fx-rec mt-[7px] inline-block h-2 w-2 shrink-0 rounded-full bg-safelight-500" />
+                {contactInfo.availability}
+              </p>
             </div>
-            <div className="space-y-2">
-              <p className="text-xs uppercase tracking-[0.35em] text-slate-400">Location</p>
-              <p className="text-body font-medium text-white">{contactInfo.location}</p>
-            </div>
-            <div className="space-y-2">
-              <p className="text-xs uppercase tracking-[0.35em] text-slate-400">Availability</p>
-              <p className="text-body font-medium text-white">{contactInfo.availability}</p>
-            </div>
-            <div className="space-y-2">
-              <p className="text-xs uppercase tracking-[0.35em] text-slate-400">Languages</p>
-              <ul className="grid gap-1 sm:grid-cols-2">
+            <div>
+              <p className="camera-label">Languages</p>
+              <ul className="mt-3 space-y-1.5">
                 {contactInfo.languages.map((lang) => (
-                  <li key={lang.name} className="text-body text-white">
-                    <span className="font-medium">{lang.name}</span>
-                    <span className="text-slate-400"> · {lang.level}</span>
+                  <li key={lang.name} className="text-[15px] text-paper-200">
+                    {lang.name} <span className="text-paper-600">· {lang.level}</span>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {socialLinks.map((link) => (
+          </FocusPull>
+
+          <FocusPull delay={0.15} className="mt-10 flex flex-wrap gap-x-8 gap-y-3">
+            {socialLinks
+              .filter((l) => l.label !== 'Email')
+              .map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
                   target="_blank"
-                  rel="noreferrer"
-                  className="rounded-3xl border border-midnight-400/18 bg-navy-950/90 px-4 py-3 text-body font-medium text-slate-200 transition hover:border-midnight-400/40 hover:bg-navy-950 hover:text-white"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-mono text-[12px] uppercase tracking-[0.2em] text-paper-300 underline decoration-ink-600 underline-offset-[6px] hover:text-paper-50 hover:decoration-safelight-500"
                 >
-                  {link.label}
+                  {link.label} <ArrowUpRight className="h-3.5 w-3.5" />
                 </a>
               ))}
-            </div>
-          </div>
-        </motion.div>
+          </FocusPull>
+        </div>
 
-        <motion.div variants={panelVariants} className="royal-card rounded-[32px] border border-midnight-400/28 bg-navy-900 p-8 shadow-[0_0_0_1px_rgba(212,175,55,0.08),_0_32px_80px_rgba(7,5,15,0.9)]">
-          <div className="mb-8 flex items-start justify-between gap-4">
-            <div>
-              <p className="text-xs uppercase tracking-[0.35em] text-midnight-400/80">Send a message</p>
-              <h3 className="mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl">Let’s start a conversation</h3>
-            </div>
+        <FocusPull delay={0.1} className="border border-ink-700 bg-ink-950/60 p-6 sm:p-10">
+          <p className="camera-label">Send a message</p>
+          <div className="mt-6">
+            <ContactForm />
           </div>
-
-          <ContactForm />
-        </motion.div>
-      </motion.div>
+        </FocusPull>
+      </div>
     </SectionContainer>
   );
 }

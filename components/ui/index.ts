@@ -1,9 +1,5 @@
 export { Button } from './button';
 export { Card } from './card';
-export { Badge } from './badge';
 export { Input } from './input';
 export { Textarea } from './textarea';
-export { Sheet } from './sheet';
-export { ProjectCard } from './project-card';
-export { LoadingScreen } from './loading-screen';
 export { ContactForm } from './contact-form';

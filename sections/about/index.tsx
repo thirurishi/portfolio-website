@@ -1,115 +1,79 @@
 'use client';
 
-import { motion } from 'motion/react';
 import Image from 'next/image';
+import { motion, useInView, useReducedMotion, useScroll, useTransform } from 'motion/react';
+import { useRef } from 'react';
 import { SectionContainer } from '@/components/shared';
-import { Card } from '@/components/ui';
+import { FocusPull } from '@/components/fx/focus-pull';
+import { CountUp } from '@/components/fx/count-up';
 import { aboutContent } from '@/data/about';
-import { fadeInUp, sectionContainer } from '@/lib/motion';
 
-const reveal = fadeInUp;
+const stats = [
+  { value: 6, label: 'Selected projects' },
+  { value: 93358, label: 'Customers in my largest analysis' },
+  { value: 4, label: 'Languages spoken' }
+];
 
 export function About() {
+  const printRef = useRef<HTMLDivElement>(null);
+  const developed = useInView(printRef, { once: true, amount: 0.5 });
+  const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: printRef, offset: ['start end', 'end start'] });
+  const printY = useTransform(scrollYProgress, [0, 1], [reduce ? 0 : 40, reduce ? 0 : -40]);
+  const printRotate = useTransform(scrollYProgress, [0, 1], [reduce ? -2 : -4, reduce ? -2 : 1]);
+
   return (
-    <SectionContainer id="about" title="About">
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.15 }}
-        variants={sectionContainer}
-        className="relative space-y-8"
-      >
-        {/* Label badge */}
-        <motion.div variants={reveal} className="inline-flex">
-          <div className="rounded-full border border-midnight-400/30 bg-navy-950/90 px-4 py-2 shadow-midnight">
-            <span className="text-caption text-midnight-300">Analytics x AI x Business</span>
+    <SectionContainer id="about" scene="02" kicker="About" title="Analytical rigour, a photographer's eye.">
+      <div className="grid items-start gap-14 lg:grid-cols-[5fr_7fr] lg:gap-20">
+        {/* The print */}
+        <motion.div ref={printRef} style={{ y: printY, rotate: printRotate }} className="mx-auto w-full max-w-[420px]">
+          <div className={`bg-paper-100 p-3 pb-14 shadow-print ${developed ? 'develop-on' : ''}`}>
+            <div className="develop relative aspect-[4/5] overflow-hidden bg-ink-900">
+              <Image
+                src="/about-me.jpeg"
+                alt="Portrait of Thirumurugan Kumar"
+                fill
+                sizes="(min-width: 1024px) 420px, 90vw"
+                className="object-cover object-[50%_25%]"
+              />
+            </div>
+            <p className="mt-4 text-center font-display text-xl italic text-ink-900">Thirumurugan Kumar</p>
+            <p className="mt-1 text-center font-mono text-[10px] uppercase tracking-[0.25em] text-ink-500">Fig. 01 · Portrait</p>
           </div>
         </motion.div>
 
-        {/* Single outer grid — columns stay locked across both rows */}
-        <div className="grid items-start gap-8 xl:grid-cols-[5fr_7fr]">
-
-          {/* ── LEFT COLUMN ── */}
-          <div className="flex flex-col gap-8">
-
-            {/* Portrait */}
-            <motion.div variants={reveal}>
-              <div className="royal-card group relative overflow-hidden rounded-[32px] border border-midnight-400/28 bg-navy-950/95 shadow-midnight">
-                <Image
-                  src="/about-me.jpeg"
-                  alt="Thirumurugan Kumar"
-                  width={900}
-                  height={1200}
-                  className="w-full object-contain max-h-[580px] transition-transform duration-700 group-hover:scale-[1.02]"
-                  priority={false}
-                />
-              </div>
-            </motion.div>
-
-            {/* 4 highlight cards — 2×2 grid */}
-            <motion.div variants={reveal}>
-              <div className="grid gap-4 sm:grid-cols-2">
-                {aboutContent.highlightCards.map((card, index) => (
-                  <motion.div
-                    key={card.title}
-                    variants={fadeInUp}
-                    transition={{ delay: 0.08 * index }}
-                    className="rounded-3xl border border-midnight-400/22 bg-navy-950/90 p-6 shadow-midnight transition duration-300 hover:-translate-y-1 hover:border-midnight-400/30"
-                  >
-                    <p className="text-caption text-midnight-400/80">{card.title}</p>
-                    <p className="mt-3 text-sm leading-7 text-slate-300">
-                      {card.description}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
+        {/* Story */}
+        <div>
+          <div className="space-y-6">
+            {aboutContent.overview.map((paragraph, i) => (
+              <FocusPull key={i} delay={i * 0.05}>
+                <p className={i === 0 ? 'font-display text-2xl leading-snug text-paper-50 sm:text-3xl' : 'text-[17px] leading-relaxed text-paper-400'}>
+                  {paragraph}
+                </p>
+              </FocusPull>
+            ))}
           </div>
 
-          {/* ── RIGHT COLUMN ── */}
-          <div className="flex flex-col gap-8">
-
-            {/* About info */}
-            <motion.div variants={reveal}>
-              <div className="royal-card rounded-[32px] border border-midnight-400/28 bg-navy-900 p-8 shadow-[0_0_0_1px_rgba(212,175,55,0.08),_0_32px_80px_rgba(7,5,15,0.9)]">
-                <p className="text-xs uppercase tracking-[0.35em] text-midnight-400/80">Overview</p>
-                <h3 className="mt-2 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-                  Who I am
-                </h3>
-                <div className="mt-6 space-y-5">
-                  {aboutContent.overview.map((paragraph, index) => (
-                    <p key={index} className="text-body leading-8 text-slate-300 sm:text-[1.05rem]">
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
+          <FocusPull className="mt-12 grid grid-cols-3 gap-4 border-y border-ink-700 py-8">
+            {stats.map((s) => (
+              <div key={s.label}>
+                <CountUp value={s.value} className="block font-display text-4xl text-paper-50 sm:text-5xl" />
+                <span className="mt-2 block font-mono text-[10px] uppercase leading-relaxed tracking-[0.18em] text-paper-600">{s.label}</span>
               </div>
-            </motion.div>
+            ))}
+          </FocusPull>
 
-            {/* Technical strength */}
-            <motion.div variants={reveal}>
-              <Card className="border-midnight-400/28 bg-navy-950/90 p-8">
-                <p className="text-xs uppercase tracking-[0.35em] text-midnight-400/80">Toolkit</p>
-                <h3 className="mt-2 text-2xl font-semibold tracking-tight text-white">Technical strength</h3>
-                <p className="mt-2 text-sm leading-7 text-slate-400">
-                  A practical stack for analytics, engineering, and AI delivery.
-                </p>
-                <div className="mt-6 grid grid-cols-2 gap-2.5">
-                  {aboutContent.strengths.map((item) => (
-                    <div
-                      key={item}
-                      className="rounded-2xl border border-navy-800/90 bg-navy-975/90 px-4 py-2.5 text-sm font-medium text-slate-200 transition duration-200 hover:border-midnight-400/30 hover:text-white"
-                    >
-                      {item}
-                    </div>
-                  ))}
-                </div>
-              </Card>
-            </motion.div>
-
+          <div className="mt-12 grid gap-px bg-ink-700 sm:grid-cols-2">
+            {aboutContent.highlightCards.map((card, i) => (
+              <FocusPull key={card.title} delay={i * 0.08} className="bg-ink-975 p-6">
+                <span className="font-mono text-[11px] text-safelight-400">0{i + 1}</span>
+                <h3 className="mt-3 font-display text-2xl text-paper-50">{card.title}</h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-paper-500">{card.description}</p>
+              </FocusPull>
+            ))}
           </div>
         </div>
-      </motion.div>
+      </div>
     </SectionContainer>
   );
 }

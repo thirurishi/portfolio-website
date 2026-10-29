@@ -1,8 +1,13 @@
 export interface ProjectData {
   slug: string;
   title: string;
-  /** Short label shown above the title, e.g. "Team project" */
+  /** Short label shown above the title */
   context?: string;
+  /** Headline number shown on the film frame (counts up when visible) */
+  metric?: { value: number; decimals?: number; prefix?: string; suffix?: string; label: string };
+  /** Frame artwork style and the colour it develops into */
+  art?: 'cohort' | 'ensemble' | 'gauge' | 'pipeline' | 'schema' | 'trend';
+  tint?: string;
   description: string;
   overview: string;
   problem: string;
@@ -27,6 +32,9 @@ export interface ProjectData {
 export const projectsData: ProjectData[] = [
   {
     slug: 'repeat-purchase-recovery',
+    metric: { value: 93358, label: 'customers analysed' },
+    art: 'cohort',
+    tint: '#f59e0b',
     title: 'Repeat Purchase Recovery: E-Commerce Retention Analysis',
     context: 'Product analytics case study',
     description:
@@ -76,6 +84,9 @@ export const projectsData: ProjectData[] = [
 
   {
     slug: 'fake-news',
+    metric: { value: 3, suffix: ' models', label: 'deep learning ensemble + RAG' },
+    art: 'ensemble',
+    tint: '#38bdf8',
     title: 'AI Fake News Detection Platform',
     context: 'NLP · RAG platform',
     description:
@@ -125,6 +136,9 @@ export const projectsData: ProjectData[] = [
 
   {
     slug: 'ai-resume-job-match-analyzer',
+    metric: { value: 5, prefix: '<', suffix: 's', label: 'per resume analysis' },
+    art: 'gauge',
+    tint: '#34d399',
     title: 'AI Resume & Job Match Analyzer',
     context: 'Deployed app',
     description:
@@ -176,6 +190,9 @@ export const projectsData: ProjectData[] = [
 
   {
     slug: 'employee-performance',
+    metric: { value: 7, suffix: ' services', label: 'orchestrated with Docker Compose' },
+    art: 'pipeline',
+    tint: '#a78bfa',
     title: 'Employee Attrition Prediction: End-to-End ML System',
     context: 'MLOps system',
     description:
@@ -225,6 +242,9 @@ export const projectsData: ProjectData[] = [
 
   {
     slug: 'retail-profitability-analytics',
+    metric: { value: 12.56, decimals: 2, suffix: '%', label: 'profit margin, reconciled in SQL and DAX' },
+    art: 'schema',
+    tint: '#f472b6',
     title: 'Retail Profitability & Business Intelligence',
     context: 'BI case study',
     description:
@@ -274,6 +294,9 @@ export const projectsData: ProjectData[] = [
 
   {
     slug: 'sales-performance-dashboard',
+    metric: { value: 2.29, decimals: 2, prefix: '$', suffix: 'M', label: 'revenue analysed across 9,994 orders' },
+    art: 'trend',
+    tint: '#fb7185',
     title: 'Global Sales Performance Analysis & Executive Dashboard',
     context: 'Analytics case study',
     description:
