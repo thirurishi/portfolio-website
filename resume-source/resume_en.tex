@@ -1,0 +1,70 @@
+\input{preamble}
+\hypersetup{pdftitle={Thirumurugan Kumar - Resume},pdfauthor={Thirumurugan Kumar}}
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries THIRUMURUGAN KUMAR}\\[3pt]
+  Paris, France \sep +33 6 05 52 73 58 \sep \lnk{mailto:rishithiru1998@gmail.com}{rishithiru1998@gmail.com}\\[1pt]
+  \lnk{https://thiruuportfolio.netlify.app}{thiruuportfolio.netlify.app} \sep
+  \lnk{https://github.com/thirurishi}{github.com/thirurishi} \sep
+  \lnk{https://www.linkedin.com/in/thirumurugan-kumar-a63792251/}{linkedin.com/in/thirumurugan-kumar-a63792251}
+\end{center}
+\vspace{2pt}
+
+Master's student in Data Science \& Analytics at EPITA, \textbf{available immediately for a 6-month end-of-studies internship} (Data Analyst, Data Scientist, BI or AI). Project experience across the full data lifecycle: SQL and Python analysis, Power BI dashboards, data-quality pipelines, machine learning and deployed NLP and RAG/LLM applications.
+
+\section{Education}
+\role{\textbf{Master's in Computer Science -- Data Science \& Analytics}, EPITA, Paris, France}{2024 -- 2026}\\
+\role{\textbf{Bachelor's in Information Technology}, St.\ Joseph's College of Engineering, Chennai, India}{2020 -- 2024}
+
+\section{Projects}
+\entry{Repeat Purchase Recovery Analytics}{\plinks{\lnk{https://github.com/thirurishi/repeat-purchase-recovery}{GitHub}}}{SQL, SQLite, Python, pandas, Power BI}
+\begin{itemize}
+  \item Built a six-layer SQL pipeline (20 SQLite views, 63 validation queries) over 93,358 customers and 96,478 delivered orders to analyse cohort retention, customer lifetime value, segmentation and churn signals.
+  \item Found a 3.0\% lifetime repeat rate and a 29-day median return window; single-item first orders (90\% of customers) repeat at 2.15\% vs 5.38\% for baskets of 6+ items.
+  \item Recommended three prioritised retention plays; a scenario model estimates $\sim$928 additional repeat buyers (+33\%) under stated assumptions.
+\end{itemize}
+
+\entry{AI Resume \& Job Match Analyzer}{\plinks{\lnk{https://ai-resume-job-match-analyzer.streamlit.app/}{Live demo}\sep\lnk{https://github.com/thirurishi/ai-resume-job-match-analyzer}{GitHub}}}{Python, Streamlit, scikit-learn, PyMuPDF, SQLite, Pytest}
+\begin{itemize}
+  \item Built and deployed an NLP web app that parses PDF resumes and scores job fit with an explainable ATS formula (50\% skill match, 30\% TF-IDF semantic similarity, 20\% resume completeness).
+  \item Generates skill-gap analysis, recruiter-style feedback, a cover letter and a LinkedIn message in under 5 seconds; modular codebase with Pytest unit tests and SQLite history.
+\end{itemize}
+
+\entry{Fake News Detection Platform (RAG/LLM)}{}{PyTorch, TensorFlow, LangChain, FAISS, FastAPI, PostgreSQL}
+\begin{itemize}
+  \item Full-stack fact-checking platform classifying news claims with an ensemble of LSTM, GRU and TextCNN models trained on the LIAR dataset.
+  \item Explainability layer combining web scraping, BERT evidence-relevance scoring, FAISS similarity search and LLM justifications (LangChain, Groq); FastAPI with JWT authentication, PostgreSQL and Docker Compose.
+\end{itemize}
+
+\entry{Employee Attrition Prediction System}{}{Python, scikit-learn, Airflow, FastAPI, Docker}
+\begin{itemize}
+  \item End-to-end ML system: Airflow ingestion, Great Expectations quality gates separating valid and invalid data, PostgreSQL storage and a Random Forest classifier (F1 0.85 on synthetic data).
+  \item Single and batch predictions served through FastAPI and Streamlit, with Grafana monitoring, Microsoft Teams alerts and Docker Compose deployment.
+\end{itemize}
+
+\entry{Retail Business Intelligence \& Profitability Optimisation}{\plinks{\lnk{https://github.com/thirurishi/retail-profitability-analytics}{GitHub}}}{SQL, SQLite, Power BI, DAX, Power Query}
+\begin{itemize}
+  \item Designed a two-page Power BI report on a star-schema model (1 fact, 4 dimension tables) with six DAX measures, analysing 10,194 sales rows across 5,111 orders (2.33M revenue, 12.56\% margin).
+  \item Wrote four SQL analyses of category, product and discount-band profitability, reconciled them with Power BI measures, and highlighted loss-making products for review.
+\end{itemize}
+
+\section{Experience}
+\role{\textbf{Android Application Development Intern} -- National Small Industries Corporation (NSIC)}{December 2022}
+\begin{itemize}
+  \item Developed an all-in-one tourism Android app bringing together destination guides, best-season-to-visit recommendations, top places and restaurant suggestions.
+  \item Built a flight search and fare-comparison feature, similar to Google Flights, to help users find cheaper flights; delivered through a structured cycle of development, testing and documentation.
+\end{itemize}
+
+\section{Skills}
+\begin{itemize}
+  \item \textbf{Data Analysis \& BI:} SQL, Python (pandas, NumPy), Power BI, DAX, Power Query, Excel (advanced), Matplotlib, Seaborn; KPI, cohort and retention analysis
+  \item \textbf{Machine Learning \& NLP:} scikit-learn, TensorFlow, PyTorch, Hugging Face Transformers, LSTM, GRU, TextCNN, TF-IDF; RAG with LangChain and FAISS
+  \item \textbf{Data Engineering \& Deployment:} PostgreSQL, SQLite, Apache Airflow, Great Expectations, FastAPI, Docker Compose, Streamlit, Grafana
+  \item \textbf{Tools:} Git, GitHub, Jupyter, Pytest, Android development
+\end{itemize}
+
+\section{Languages}
+English (Fluent) \sep French (Professional working proficiency) \sep Tamil (Native) \sep Hindi (Intermediate)
+
+\end{document}

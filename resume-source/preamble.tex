@@ -1,0 +1,43 @@
+\documentclass[10pt]{article}
+\usepackage[a4paper,top=1.0cm,bottom=0.9cm,left=1.5cm,right=1.5cm]{geometry}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}[
+  Path=/usr/share/texmf/fonts/opentype/public/lm/,
+  Extension=.otf,
+  UprightFont=lmroman10-regular,
+  BoldFont=lmroman10-bold,
+  ItalicFont=lmroman10-italic,
+  BoldItalicFont=lmroman10-bolditalic,
+  SmallCapsFont=lmromancaps10-regular
+]
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{linkblue}{RGB}{20,60,140}
+\newcommand{\lnk}[2]{\href{#1}{\textcolor{linkblue}{#2}}}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+\titleformat{\section}{\large\bfseries\scshape}{}{0pt}{}[\vspace{-6pt}\rule{\textwidth}{0.6pt}]
+\titlespacing*{\section}{0pt}{5pt}{3pt}
+
+\setlist[itemize]{leftmargin=1.1em,label=\textbullet,itemsep=0.5pt,topsep=1pt,parsep=0pt}
+
+% \entry{Title}{links}{tech}
+\newcommand{\entry}[3]{%
+  \vspace{2pt}\begin{tabularx}{\textwidth}{@{}X r@{}}
+    \textbf{#1}#2 & \small\textit{#3}
+  \end{tabularx}\vspace{-1pt}}
+% \role{Title}{date}
+\newcommand{\role}[2]{%
+  \vspace{2pt}\begin{tabularx}{\textwidth}{@{}X r@{}}
+    #1 & #2
+  \end{tabularx}\vspace{-1pt}}
+\newcommand{\plinks}[1]{\hspace{0.5em}\small{#1}}
+\newcommand{\sep}{\enspace|\enspace}

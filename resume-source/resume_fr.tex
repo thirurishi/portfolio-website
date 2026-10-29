@@ -1,0 +1,70 @@
+\input{preamble}
+\hypersetup{pdftitle={Thirumurugan Kumar - CV},pdfauthor={Thirumurugan Kumar}}
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries THIRUMURUGAN KUMAR}\\[3pt]
+  Paris, France \sep +33 6 05 52 73 58 \sep \lnk{mailto:rishithiru1998@gmail.com}{rishithiru1998@gmail.com}\\[1pt]
+  \lnk{https://thiruuportfolio.netlify.app}{thiruuportfolio.netlify.app} \sep
+  \lnk{https://github.com/thirurishi}{github.com/thirurishi} \sep
+  \lnk{https://www.linkedin.com/in/thirumurugan-kumar-a63792251/}{linkedin.com/in/thirumurugan-kumar-a63792251}
+\end{center}
+\vspace{2pt}
+
+Étudiant en Master Data Science \& Analytics à l'EPITA, \textbf{disponible immédiatement pour un stage de fin d'études de 6 mois} (Data Analyst, Data Scientist, BI ou IA). Expérience projet sur l'ensemble du cycle de la donnée : analyse SQL et Python, tableaux de bord Power BI, pipelines de qualité des données, machine learning et applications NLP et RAG/LLM déployées.
+
+\section{Formation}
+\role{\textbf{Master en informatique -- Data Science \& Analytics}, EPITA, Paris, France}{2024 -- 2026}\\
+\role{\textbf{Bachelor en technologies de l'information}, St.\ Joseph's College of Engineering, Chennai, Inde}{2020 -- 2024}
+
+\section{Projets}
+\entry{Analyse du réachat client (Repeat Purchase Recovery)}{\plinks{\lnk{https://github.com/thirurishi/repeat-purchase-recovery}{GitHub}}}{SQL, SQLite, Python, pandas, Power BI}
+\begin{itemize}
+  \item Construction d'un pipeline SQL en six couches (20 vues SQLite, 63 requêtes de validation) sur 93\,358 clients et 96\,478 commandes livrées : rétention par cohorte, valeur vie client, segmentation et signaux de churn.
+  \item Taux de réachat de 3,0\,\% et délai médian de retour de 29 jours ; les premières commandes d'un seul article (90\,\% des clients) donnent 2,15\,\% de réachat contre 5,38\,\% pour les paniers de 6 articles et plus.
+  \item Recommandation de trois actions de rétention priorisées ; un modèle de scénarios estime $\sim$928 clients récurrents supplémentaires (+33\,\%) (hypothèses explicites).
+\end{itemize}
+
+\entry{Analyseur IA CV / offre d'emploi}{\plinks{\lnk{https://ai-resume-job-match-analyzer.streamlit.app/}{Démo}\sep\lnk{https://github.com/thirurishi/ai-resume-job-match-analyzer}{GitHub}}}{Python, Streamlit, scikit-learn, PyMuPDF, SQLite, Pytest}
+\begin{itemize}
+  \item Conception et déploiement d'une application web NLP qui analyse les CV au format PDF et calcule un score ATS explicable (50\,\% compétences, 30\,\% similarité sémantique TF-IDF, 20\,\% complétude du CV).
+  \item Génère en moins de 5 secondes l'analyse des compétences manquantes, des recommandations de type recruteur, une lettre de motivation et un message LinkedIn ; tests Pytest et historique SQLite.
+\end{itemize}
+
+\entry{Détection de fake news (RAG/LLM)}{}{PyTorch, TensorFlow, LangChain, FAISS, FastAPI, PostgreSQL}
+\begin{itemize}
+  \item Plateforme full-stack de fact-checking classant des affirmations avec un ensemble de modèles LSTM, GRU et TextCNN entraînés sur le jeu de données LIAR.
+  \item Couche d'explicabilité combinant web scraping, score de pertinence BERT, recherche de similarité FAISS et justifications générées par LLM (LangChain, Groq) ; FastAPI (JWT), PostgreSQL, Docker Compose.
+\end{itemize}
+
+\entry{Système de prédiction de l'attrition des employés}{}{Python, scikit-learn, Airflow, FastAPI, Docker}
+\begin{itemize}
+  \item Système ML de bout en bout : ingestion Airflow, contrôles qualité Great Expectations séparant données valides et invalides, stockage PostgreSQL et classifieur Random Forest (F1 de 0,85 sur données synthétiques).
+  \item Prédictions unitaires et par lot via FastAPI et Streamlit, avec supervision Grafana, alertes Microsoft Teams et déploiement Docker Compose.
+\end{itemize}
+
+\entry{Business Intelligence \& rentabilité retail}{\plinks{\lnk{https://github.com/thirurishi/retail-profitability-analytics}{GitHub}}}{SQL, SQLite, Power BI, DAX, Power Query}
+\begin{itemize}
+  \item Conception d'un rapport Power BI de deux pages sur un modèle en étoile (1 table de faits, 4 dimensions) avec six mesures DAX, analysant 10\,194 lignes de ventes sur 5\,111 commandes (2,33\,M de CA, marge de 12,56\,\%).
+  \item Rédaction de quatre analyses SQL de rentabilité par catégorie, produit et niveau de remise, rapprochées des mesures Power BI, identifiant les produits déficitaires.
+\end{itemize}
+
+\section{Expérience}
+\role{\textbf{Stagiaire développeur Android} -- National Small Industries Corporation (NSIC)}{Décembre 2022}
+\begin{itemize}
+  \item Développement d'une application Android de tourisme tout-en-un : guides de destinations, meilleure saison pour voyager, lieux incontournables et recommandations de restaurants.
+  \item Création d'une fonctionnalité de recherche et de comparaison de vols, similaire à Google Flights, pour trouver les tarifs les moins chers ; travail structuré en développement, tests et documentation.
+\end{itemize}
+
+\section{Compétences}
+\begin{itemize}
+  \item \textbf{Analyse de données \& BI :} SQL, Python (pandas, NumPy), Power BI, DAX, Power Query, Excel (avancé), Matplotlib, Seaborn ; analyse de KPI, de cohortes et de rétention
+  \item \textbf{Machine learning \& NLP :} scikit-learn, TensorFlow, PyTorch, Hugging Face Transformers, LSTM, GRU, TextCNN, TF-IDF ; RAG avec LangChain et FAISS
+  \item \textbf{Data engineering \& déploiement :} PostgreSQL, SQLite, Apache Airflow, Great Expectations, FastAPI, Docker Compose, Streamlit, Grafana
+  \item \textbf{Outils :} Git, GitHub, Jupyter, Pytest, développement Android
+\end{itemize}
+
+\section{Langues}
+Anglais (courant) \sep Français (niveau professionnel) \sep Tamoul (langue maternelle) \sep Hindi (intermédiaire)
+
+\end{document}

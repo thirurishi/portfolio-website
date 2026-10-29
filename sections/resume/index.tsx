@@ -93,13 +93,22 @@ export function Resume() {
 
           <div className="mt-8 flex flex-col gap-3">
             <Button
-              href={personalInfo.resumeLink}
+              href={personalInfo.resumeLinks.en}
               variant="default"
               size="lg"
               className="w-full text-sm font-semibold"
               download
             >
-              Download résumé (PDF)
+              Download résumé — English (PDF)
+            </Button>
+            <Button
+              href={personalInfo.resumeLinks.fr}
+              variant="secondary"
+              size="lg"
+              className="w-full text-sm font-semibold"
+              download
+            >
+              Télécharger le CV — Français (PDF)
             </Button>
           </div>
         </motion.div>
